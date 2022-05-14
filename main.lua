@@ -4635,14 +4635,15 @@ aimbot:Element("Dropdown", "origin", {options = {"character", "camera"}})
 aimbot:Element("Toggle", "silent aim")
 aimbot:Element("Dropdown", "automatic fire", {options = {"off", "standard", "hitpart"}})
 aimbot:Element("Toggle", "automatic penetration")
-aimbot:Element("Jumbobox", "resolver", {options = {"pitch", "front track", "roll", "animation"}})
+aimbot:Element("Jumbobox", "resolver", {options = {"pitch", "front track", "roll", "animation", "head"}})
 aimbot:Element("Toggle", "delay shot")
 aimbot:Element("Toggle", "force hit")
 aimbot:Element("Dropdown", "prediction", {options = {"off", "cframe", "velocity"}})
-aimbot:Element("Toggle", "prediction boost") 
+aimbot:Element("Toggle", "prediction boost")
 aimbot:Element("Toggle", "teammates")
 aimbot:Element("Toggle", "auto baim")
 aimbot:Element("Toggle", "knifebot")
+aimbot:Element("Slider", "knifebot radius", {min = 0, max = 400, default = 100}) 
  
 local weapons = rage:MSector("weapons", "Left")
 local default = weapons:Tab("default")
@@ -4682,7 +4683,7 @@ antiaim:Element("Dropdown", "yaw base", {options = {"camera", "targets", "spin",
 antiaim:Element("Slider", "yaw offset", {min = -180, max = 180, default = 0})
 antiaim:Element("Toggle", "jitter")
 antiaim:Element("Slider", "jitter offset", {min = -180, max = 180, default = 0})
-antiaim:Element("Dropdown", "pitch", {options = {"none", "up", "down", "zero", "180", "random","skeet", "rad"}})
+antiaim:Element("Dropdown", "pitch", {options = {"none", "up", "down", "zero", "180", "random","skeet", "rad", "banana"}})
 antiaim:Element("Toggle", "extend pitch")
 antiaim:Element("Dropdown", "body roll", {options = {"off", "180"}})
 antiaim:Element("Slider", "spin speed", {min = 1, max = 48, default = 4})
@@ -6320,6 +6321,10 @@ RunService.RenderStepped:Connect(function(step)
 									Animation:Stop()
 								end
 							end
+
+							if table.find(values.rage.aimbot.resolver.Jumbobox, "head") then 
+								Player.Character.Head.Neck.C0 = CFrame.new(0,1,0) * CFAngles(0, 0, 0)  
+							end
 					end
 					if Player.Character and Player.Character:FindFirstChild("Humanoid") and not Client.DISABLED and Player.Character:FindFirstChild("Humanoid").Health > 0 and Player.Team ~= "TTT" and not Player.Character:FindFirstChildOfClass("ForceField") and GetDeg(CamCFrame, Player.Character.Head.Position) <= Stats["max fov"].Slider and Player ~= LocalPlayer then
 						if Player.Team ~= LocalPlayer.Team or values.rage.aimbot.teammates.Toggle and Player:FindFirstChild("Status") and Player.Status.Team.Value ~= LocalPlayer.Status.Team.Value and Player.Status.Alive.Value then
@@ -6336,8 +6341,8 @@ RunService.RenderStepped:Connect(function(step)
 									table.insert(Ignore, Player.Character.Gun)
 								end
  
-								local Ray = Ray.new(Origin, (Player.Character.Head.Position - Origin).unit * 20)
-								local Hit, Pos = workspace:FindPartOnRayWithIgnoreList(Ray, Ignore, false, true)
+								local Ray = Ray.new(Origin, (Player.Character.HumanoidRootPart.Position - Origin).unit * values.rage.aimbot["knifebot radius"].Slider)
+                                			local Hit, Pos = workspace:FindPartOnRayWithIgnoreList(Ray, Ignore, false, true)
  
 								if Hit and Hit.Parent == Player.Character then
 									RageGuy = Hit
@@ -6808,7 +6813,7 @@ RunService.RenderStepped:Connect(function(step)
 				LocalPlayer.Character.Humanoid.HipHeight = 2
 			end
  
-			local Pitch = values.rage.angles["pitch"].Dropdown == "none" and CamLook.Y or values.rage.angles["pitch"].Dropdown == "up" and 1 or values.rage.angles["pitch"].Dropdown == "down" and -1 or values.rage.angles["pitch"].Dropdown == "skeet" and -15 or values.rage.angles["pitch"].Dropdown == "rad" and math.rad(math.random(-10,10)) or values.rage.angles["pitch"].Dropdown == "zero" and 0 or values.rage.angles["pitch"].Dropdown == "random" and math.random(-10, 10)/10 or 2.5
+			local Pitch = values.rage.angles["pitch"].Dropdown == "none" and CamLook.Y or values.rage.angles["pitch"].Dropdown == "up" and 1 or values.rage.angles["pitch"].Dropdown == "down" and -1 or values.rage.angles["pitch"].Dropdown == "skeet" and -15 or values.rage.angles["pitch"].Dropdown == "rad" and math.rad(math.random(-10,10)) or values.rage.angles["pitch"].Dropdown == "banana" and -6 or values.rage.angles["pitch"].Dropdown == "zero" and 0 or values.rage.angles["pitch"].Dropdown == "random" and math.random(-10, 10)/10 or 2.5
 			if values.rage.angles["extend pitch"].Toggle and (values.rage.angles["pitch"].Dropdown == "up" or values.rage.angles["pitch"].Dropdown == "down") then
 				Pitch = (Pitch*2)/1.6
 			end
