@@ -5116,7 +5116,8 @@ effects:Element("ToggleTrans", "arm chams", {default = {Color = Color3.fromRGB(2
 end)
 
 effects:Element("Slider", "Arms Transparency", {min = 0, max = 100, default = 0}, function(val)
-	Camera.Arms.Transparency = values.visuals.effects["Arms Transparency"].Slider / 100
+	RArm.Transparency = values.visuals.effects["Arms Transparency"].Slider / 100
+	LArm.Transparency = values.visuals.effects["Arms Transparency"].Slider / 100
 end)
 
 effects:Element("Jumbobox", "removals", {options = {"scope", "scope lines", "flash", "smoke", "decals", "shadows", "clothes"}}, function(val)
