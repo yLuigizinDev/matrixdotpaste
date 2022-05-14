@@ -36,6 +36,38 @@ local TweenService = game:GetService("TweenService")
 function library:Tween(...) TweenService:Create(...):Play() end
 local cfglocation = "matrixcfg/"
 makefolder("matrixcfg")
+
+local Vec2 = Vector2.new 
+local Vec3 = Vector3.new 
+local CF = CFrame.new 
+local INST = Instance.new 
+local COL3 = Color3.new 
+local COL3RGB = Color3.fromRGB 
+local COL3HSV = Color3.fromHSV 
+local CLAMP = math.clamp 
+local DEG = math.deg 
+local FLOOR = math.floor 
+local ACOS = math.acos 
+local RANDOM = math.random 
+local ATAN2 = math.atan2 
+local HUGE = math.huge 
+local RAD = math.rad 
+local MIN = math.min 
+local POW = math.pow 
+local UDIM2 = UDim2.new 
+local CFAngles = CFrame.Angles 
+
+local FIND = string.find 
+local LEN = string.len 
+local SUB = string.sub 
+local GSUB = string.gsub 
+local RAY = Ray.new 
+
+local INSERT = table.insert 
+local TBLFIND = table.find 
+local TBLREMOVE = table.remove 
+local TBLSORT = table.sort 
+
 function rgbtotbl(rgb)
 	return {R = rgb.R, G = rgb.G, B = rgb.B}
 end
@@ -114,7 +146,7 @@ function library:New(name)
     cursor.Parent = matrixGui
     cursor.BackgroundTransparency = 1
     cursor.Size = UDim2.new(0,17,0,17)
-    cursor.Image = "rbxassetid://518398610"
+    cursor.Image = "rbxassetid://9629707232"
     cursor.ZIndex = 1000
     cursor.ImageColor3 = Color3.fromRGB(255,255,255)
  
@@ -4703,7 +4735,7 @@ antiaim:Element("Dropdown", "yaw base", {options = {"camera", "targets", "spin",
 antiaim:Element("Slider", "yaw offset", {min = -180, max = 180, default = 0})
 antiaim:Element("Toggle", "jitter")
 antiaim:Element("Slider", "jitter offset", {min = -180, max = 180, default = 0})
-antiaim:Element("Dropdown", "pitch", {options = {"none", "up", "down", "zero", "180", "random","skeet", "rad", "banana"}})
+antiaim:Element("Dropdown", "pitch", {options = {"none", "up", "down", "zero", "180", "random","skeet", "huge", "banana"}})
 antiaim:Element("Toggle", "extend pitch")
 antiaim:Element("Dropdown", "body roll", {options = {"off", "180"}})
 antiaim:Element("Slider", "spin speed", {min = 1, max = 48, default = 4})
@@ -7007,7 +7039,7 @@ RunService.RenderStepped:Connect(function(step)
 				LocalPlayer.Character.Humanoid.HipHeight = 2
 			end
  
-			local Pitch = values.rage.angles["pitch"].Dropdown == "none" and CamLook.Y or values.rage.angles["pitch"].Dropdown == "up" and 1 or values.rage.angles["pitch"].Dropdown == "down" and -1 or values.rage.angles["pitch"].Dropdown == "skeet" and -15 or values.rage.angles["pitch"].Dropdown == "rad" and math.rad(math.random(-10,10)) or values.rage.angles["pitch"].Dropdown == "banana" and -6 or values.rage.angles["pitch"].Dropdown == "zero" and 0 or values.rage.angles["pitch"].Dropdown == "random" and math.random(-10, 10)/10 or 2.5
+			local Pitch = values.rage.angles["pitch"].Dropdown == "none" and CamLook.Y or values.rage.angles["pitch"].Dropdown == "up" and 1 or values.rage.angles["pitch"].Dropdown == "down" and -1 or values.rage.angles["pitch"].Dropdown == "skeet" and -15 or values.rage.angles["pitch"].Dropdown == "huge" and HUGE or values.rage.angles["pitch"].Dropdown == "banana" and -6 or values.rage.angles["pitch"].Dropdown == "zero" and 0 or values.rage.angles["pitch"].Dropdown == "random" and math.random(-10, 10)/10 or 2.5
 			if values.rage.angles["extend pitch"].Toggle and (values.rage.angles["pitch"].Dropdown == "up" or values.rage.angles["pitch"].Dropdown == "down") then
 				Pitch = (Pitch*2)/1.6
 			end
