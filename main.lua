@@ -44,6 +44,8 @@ task.wait(0.1)
 
 getgenv().values = {}
 
+underground = false
+
 -- getgenvs --
 getgenv().PasteName = "matrix"
 
@@ -4868,7 +4870,10 @@ antiaim:Element("Slider", "jitter offset", {min = -180, max = 180, default = 0})
 antiaim:Element("Dropdown", "pitch", {options = {"none", "up", "down", "zero", "180", "random","skeet", "huge", "banana"}})
 antiaim:Element("Toggle", "extend pitch")
 antiaim:Element("Dropdown", "body roll", {options = {"off", "180"}})
+antiaim:Element("Toggle", "underground aa")  
+antiaim:Element("Slider", "underground pos", {min = -200, max = 200, default = 4})  
 antiaim:Element("Slider", "spin speed", {min = 1, max = 48, default = 4})
+antiaim:Element("Slider", "high pos", {min = -3, max = 20, default = 2})
  
 local others = rage:Sector("others", "Right")
 others:Element("Toggle", "remove head")
@@ -7216,9 +7221,14 @@ RunService.RenderStepped:Connect(function(step)
 			Root.CFrame = YROTATION(CFramePos)
 			if values.rage.angles["body roll"].Dropdown == "180" then
 				Root.CFrame = Root.CFrame * CFrame.Angles(values.rage.angles["body roll"].Dropdown == "180" and math.rad(180) or 0, 1, 0)
-				LocalPlayer.Character.Humanoid.HipHeight = 4
+				LocalPlayer.Character.Humanoid.HipHeight = values.rage.angles["high pos"].Slider or 1
 			else
-				LocalPlayer.Character.Humanoid.HipHeight = 2
+				LocalPlayer.Character.Humanoid.HipHeight = values.rage.angles["high pos"].Slider or 1
+			end
+
+			if values.rage.angles["underground aa"].Toggle == true and underground == false then
+				LocalPlayer.Character.LowerTorso.Root.C0 = LocalPlayer.Character.LowerTorso.Root.C0 * CFrame.Angles(0, 0, 0) * CFrame.new(0, values.rage.angles["underground pos"].Slider, 0)
+				underground = true
 			end
  
 			local Pitch = values.rage.angles["pitch"].Dropdown == "none" and CamLook.Y or values.rage.angles["pitch"].Dropdown == "up" and 1 or values.rage.angles["pitch"].Dropdown == "down" and -1 or values.rage.angles["pitch"].Dropdown == "skeet" and -15 or values.rage.angles["pitch"].Dropdown == "huge" and HUGE or values.rage.angles["pitch"].Dropdown == "banana" and -6 or values.rage.angles["pitch"].Dropdown == "zero" and 0 or values.rage.angles["pitch"].Dropdown == "random" and math.random(-10, 10)/10 or 2.5
