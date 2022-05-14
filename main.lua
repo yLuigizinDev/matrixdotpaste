@@ -5908,17 +5908,6 @@ end
  
 local movement = misc:Sector("movement", "Left")
 movement:Element("Toggle", "bunny hop")
-if values.misc.movement["bunny hop"].Toggle then
-	game.CoreGui.BH.BHF.Visible = true
-	if UserInputService:IsKeyDown("Space") then
-		game.CoreGui.BHF.TEXT.TextColor3 = Color3.fromRGB(0,255,0)
-	else
-		game.CoreGui.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
-	end
-else
-	game.CoreGui.BH.BHF.Visible = false
-	game.CoreGui.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
-end
 movement:Element("Dropdown", "direction", {options = {"forward", "directional", "directional 2"}})
 movement:Element("Dropdown", "type", {options = {"gyro", "cframe"}})
 movement:Element("Slider", "speed", {min = 15, max = 300, default = 40})
@@ -6753,29 +6742,38 @@ RunService.RenderStepped:Connect(function(step)
 				BodyVelocity:Destroy()
 		BodyVelocity = Instance.new("BodyVelocity")
 		BodyVelocity.MaxForce = Vector3.new(math.huge,0,math.huge)
-		if UserInputService:IsKeyDown("Space") and values.misc.movement["bunny hop"].Toggle then
-			local add = 0
-			if values.misc.movement.direction.Dropdown == "directional" or values.misc.movement.direction.Dropdown == "directional 2" then
-				if UserInputService:IsKeyDown("A") then add = 90 end
-				if UserInputService:IsKeyDown("S") then add = 180 end
-				if UserInputService:IsKeyDown("D") then add = 270 end
-				if UserInputService:IsKeyDown("A") and UserInputService:IsKeyDown("W") then add = 45 end
-				if UserInputService:IsKeyDown("D") and UserInputService:IsKeyDown("W") then add = 315 end
-				if UserInputService:IsKeyDown("D") and UserInputService:IsKeyDown("S") then add = 225 end
-				if UserInputService:IsKeyDown("A") and UserInputService:IsKeyDown("S") then add = 145 end
-			end
-			local rot = YROTATION(CamCFrame) * CFrame.Angles(0,math.rad(add),0)
-			BodyVelocity.Parent = LocalPlayer.Character.UpperTorso
-			LocalPlayer.Character.Humanoid.Jump = true
-			BodyVelocity.Velocity = Vector3.new(rot.LookVector.X,0,rot.LookVector.Z) * (values.misc.movement["speed"].Slider * 2)
-			if add == 0 and values.misc.movement.direction.Dropdown == "directional" and not UserInputService:IsKeyDown("W") then
-				BodyVelocity:Destroy()
-			else
-				if values.misc.movement.type.Dropdown == "cframe" then
-					BodyVelocity:Destroy()
-					Root.CFrame = Root.CFrame + Vector3.new(rot.LookVector.X,0,rot.LookVector.Z) * values.misc.movement["speed"].Slider/50
+		if  values.misc.movement["bunny hop"].Toggle then
+			game.CoreGui.BH.BHF.Visible = true
+			if UserInputService:IsKeyDown("Space") then
+				game.CoreGui.BHF.TEXT.TextColor3 = Color3.fromRGB(0,255,0)
+				local add = 0
+				if values.misc.movement.direction.Dropdown == "directional" or values.misc.movement.direction.Dropdown == "directional 2" then
+					if UserInputService:IsKeyDown("A") then add = 90 end
+					if UserInputService:IsKeyDown("S") then add = 180 end
+					if UserInputService:IsKeyDown("D") then add = 270 end
+					if UserInputService:IsKeyDown("A") and UserInputService:IsKeyDown("W") then add = 45 end
+					if UserInputService:IsKeyDown("D") and UserInputService:IsKeyDown("W") then add = 315 end
+					if UserInputService:IsKeyDown("D") and UserInputService:IsKeyDown("S") then add = 225 end
+					if UserInputService:IsKeyDown("A") and UserInputService:IsKeyDown("S") then add = 145 end
 				end
+				local rot = YROTATION(CamCFrame) * CFrame.Angles(0,math.rad(add),0)
+				BodyVelocity.Parent = LocalPlayer.Character.UpperTorso
+				LocalPlayer.Character.Humanoid.Jump = true
+				BodyVelocity.Velocity = Vector3.new(rot.LookVector.X,0,rot.LookVector.Z) * (values.misc.movement["speed"].Slider * 2)
+				if add == 0 and values.misc.movement.direction.Dropdown == "directional" and not UserInputService:IsKeyDown("W") then
+					BodyVelocity:Destroy()
+				else
+					if values.misc.movement.type.Dropdown == "cframe" then
+						BodyVelocity:Destroy()
+						Root.CFrame = Root.CFrame + Vector3.new(rot.LookVector.X,0,rot.LookVector.Z) * values.misc.movement["speed"].Slider/50
+					end
+				end
+			else
+				game.CoreGui.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
 			end
+		else
+				game.CoreGui.BH.BHF.Visible = false
+				game.CoreGui.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
 		end
 		if values.misc.movement["edge jump"].Toggle and values.misc.movement["edge jump"].Active then
 			if LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Freefall and LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Jumping then
