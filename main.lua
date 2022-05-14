@@ -6273,6 +6273,51 @@ chat:Element("Slider", "speed (ms)", {min = 150, max = 1000, default = 500})
 chat:Element("Toggle", "kill say")
 chat:Element("TextBox", "message", {placeholder = "message"})
 chat:Element("Toggle", "no filter")
+
+		local MX_ONHIT = Instance.new("ScreenGui")
+		local OnHitFrame = Instance.new("Frame")
+		local UIListLayout = Instance.new("UIListLayout")
+		local SampleLabel = Instance.new("TextLabel")
+
+
+		MX_ONHIT.Name = "MX_ONHIT"
+		MX_ONHIT.Parent = game.CoreGui
+		MX_ONHIT.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+		OnHitFrame.Parent = MX_ONHIT
+		OnHitFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		OnHitFrame.BackgroundTransparency = 1.000
+		OnHitFrame.Position = UDim2.new(1, -300, 0, 0)
+		OnHitFrame.Size = UDim2.new(0, 300, 0, 500)
+
+		UIListLayout.Parent = OnHitFrame
+		UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+		SampleLabel.Name = "SampleLabel"
+		SampleLabel.Parent = OnHitFrame
+		SampleLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		SampleLabel.BackgroundTransparency = 1.000
+		SampleLabel.BorderSizePixel = 0
+		SampleLabel.Size = UDim2.new(1, 0, 0, 18)
+		SampleLabel.Font = Enum.Font.SourceSansLight
+		SampleLabel.Text = "Hit SamplePlayer in HeadHB "
+		SampleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+		SampleLabel.TextSize = 16.000
+		SampleLabel.TextStrokeTransparency = 0.000
+		SampleLabel.TextTransparency = 1.000
+		SampleLabel.TextXAlignment = Enum.TextXAlignment.Right
+
+		local function CreateHitElement(text,col)
+			spawn(function()
+				local Label = SampleLabel:Clone()
+				Label.Text = text
+				Label.Parent = MX_ONHIT.Frame
+				Label.TextTransparency = 0
+				Label.TextColor3 = col
+				wait(5)
+				Label:Destroy()
+			end)
+		end
  
 local grenades = misc:Sector("grenades", "Right")
 grenades:Element("ToggleKeybind", "spam grenades")
@@ -6794,6 +6839,7 @@ RunService.RenderStepped:Connect(function(step)
 														if values.rage.exploits["double tap"].Toggle and values.rage.exploits["double tap"].Active then
 															Client.firebullet()
 														end
+														CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 													elseif values.rage.aimbot["automatic fire"].Dropdown == "hitpart" then
 														Client.firebullet()
 														local Arguments = {
@@ -6827,6 +6873,7 @@ RunService.RenderStepped:Connect(function(step)
 															}
 															game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
 														end
+														CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 													end
 													Filter = false
 													break
@@ -6889,6 +6936,8 @@ RunService.RenderStepped:Connect(function(step)
 														if values.rage.exploits["double tap"].Toggle and values.rage.exploits["double tap"].Active then
 															Client.firebullet()
 														end
+		
+														CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 													elseif values.rage.aimbot["automatic fire"].Dropdown == "hitpart" then
 														Client.firebullet()
 														local Arguments = {
@@ -6922,6 +6971,7 @@ RunService.RenderStepped:Connect(function(step)
 															}
 															game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
 														end
+														CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 													end
 													Filter = false
 													break
@@ -6955,6 +7005,7 @@ RunService.RenderStepped:Connect(function(step)
 													if values.rage.exploits["double tap"].Toggle and values.rage.exploits["double tap"].Active then
 														Client.firebullet()
 													end
+													CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 												elseif values.rage.aimbot["automatic fire"].Dropdown == "hitpart" then
 													Client.firebullet()
 													local Arguments = {
@@ -6988,6 +7039,7 @@ RunService.RenderStepped:Connect(function(step)
 														}
 														game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
 													end
+													CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 												end
 												Filter = false
 												break
