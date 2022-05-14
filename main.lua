@@ -4590,7 +4590,7 @@ luascripts:Element("Button", "load", {}, function()
 	loadstring(readfile("matrixlua\\"..values.luas["lua scripts"].lua.Scroll))()
 end)
 
-local other_luas = luas:Sector("other luas", "right")
+local other_luas = luas:Sector("other luas", "Right")
 other_luas:Element("Button", "dance", {}, function(tbl)
 	wait (10)
 
