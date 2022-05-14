@@ -80,7 +80,7 @@ Load.MouseButton1Click:Connect(
     function()
         loadstring(game:HttpGet("https://github.com/yLuigizinDev/matrixdotpaste/raw/main/main.lua", true))()
         task.wait(.1)
-        MatrixLoader:Destroy()
+        game.CoreGui.MatrixLoader:Destroy()
     end
 )
 
