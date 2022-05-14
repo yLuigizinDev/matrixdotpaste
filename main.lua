@@ -5533,118 +5533,111 @@ client:Element("Toggle", "Spectators", nil, function(tbl)
     end
 end)
 
-client:Element("Toggle", "velocity graph", {}, function(tbl, graphLines, VelocityCounter)
-	if tbl.Toggle then
-	local Players = game:GetService("Players")
-	local RunService = game:GetService("RunService")
-	local LocalPlayer = Players.LocalPlayer
-	local CurrentCamera = workspace.CurrentCamera
-	
-	local graphLines = {}
-	local standardY = workspace.CurrentCamera.ViewportSize.Y-100
-	local oldY = standardY
-	local oldVelo = 0
-	
-	local VelocityCounter = Drawing.new("Text")
-	VelocityCounter.Text = ""
-	VelocityCounter.Center = true
-	VelocityCounter.Outline = true
-	VelocityCounter.Color = Color3.new(1,1,1)
-	VelocityCounter.Font = 3
-	VelocityCounter.Position = Vector2.new(CurrentCamera.ViewportSize.X/2, CurrentCamera.ViewportSize.Y-90)
-	VelocityCounter.Size = 20
-	VelocityCounter.Visible = true
-	
-	while true do
-	RunService.RenderStepped:Wait()
-	
-	standardY = CurrentCamera.ViewportSize.Y-100
-	VelocityCounter.Position = Vector2.new(CurrentCamera.ViewportSize.X/2,CurrentCamera.ViewportSize.Y-90)
-	
-	if LocalPlayer.Character and LocalPlayer.Character.PrimaryPart then
-	if #graphLines >= 1 then
-	local max = 100
-	
-	if #graphLines >= max then
-		graphLines[1]:Remove()
-		
-		local counter = 0
-	
-		for i=2,6 do
-			counter = counter + 1.8
-			graphLines[i].Transparency = 1 - (counter/10)
-		end
-		
-		graphLines[2].Transparency = 0.1
-		graphLines[3].Transparency = 0.2
-		graphLines[4].Transparency = 0.4
-		graphLines[5].Transparency = 0.6
-		graphLines[6].Transparency = 0.8
-		
-		table.remove(graphLines, 1)
-	end
-	
-	for i,v in pairs(graphLines) do
-		v.To = v.To - Vector2.new(2,0)
-		v.From = v.From - Vector2.new(2,0)
-	end
-	end
-	
-	local totalVelo = (LocalPlayer.Character.PrimaryPart.Velocity * Vector3.new(1, 0, 1)).magnitude
-	local graphVelocity = totalVelo * 14.85
-	--[[
-	if graphVelocity > 300 then
-	graphVelocity = 300
-	end
-	--]]
-	VelocityCounter.Color = Color3.new(1,1,1)
-	
-	if math.floor(totalVelo) < oldVelo then
-	VelocityCounter.Color = Color3.new(1,0.5,0.3)
-	end
-	
-	if math.floor(totalVelo) > oldVelo then
-	VelocityCounter.Color = Color3.new(0.5,1,0.3)
-	end
-	--[[
-	if math.floor(graphVelocity) == 300 then
-	VelocityCounter.Color = Color3.new(1,0.3,0.1)
-	end
-	--]]
-	local color = Color3.new(1,1,1)
-	
-	--color = Color3.fromHSV(tick()%5/5,1,1)
-	
-	local line = Drawing.new("Line")
-	
-	table.insert(graphLines, line)
-	
-	line.Color = color
-	line.Thickness = 2
-	line.From = Vector2.new(CurrentCamera.ViewportSize.X/2 + 98, oldY)
-	line.To = Vector2.new(CurrentCamera.ViewportSize.X/2 + 100, standardY - (graphVelocity/6.5))
-	line.Transparency = 0
-	line.Visible = true
-	
-	if #graphLines >= 8 then
-	graphLines[#graphLines-1].Transparency = graphLines[#graphLines-1].Transparency + 0.2
-	graphLines[#graphLines-2].Transparency = graphLines[#graphLines-2].Transparency + 0.2
-	graphLines[#graphLines-3].Transparency = graphLines[#graphLines-3].Transparency + 0.2
-	graphLines[#graphLines-4].Transparency = graphLines[#graphLines-4].Transparency + 0.2
-	graphLines[#graphLines-5].Transparency = graphLines[#graphLines-5].Transparency + 0.2
-	graphLines[#graphLines-7].Transparency = 1
-	end
-	
-	VelocityCounter.Text = tostring(math.floor(graphVelocity))
-	oldY = standardY - (graphVelocity/6.5)
-	oldVelo = math.floor(totalVelo)
-	end
-	end
-	else
-	VelocityCounter.Visible = false
-	graphLines.Visble = false
-	end
-	end)		
+client:Element("Toggle", "velocity graph", {}, function(K)
+	k["Velocity Graph"] = K
+    aS.VelocityGraph.Enabled = K
+    aP.Visible = K
+    spawn(
+        function()
+            while aS.VelocityGraph.Enabled do
+                if aS.VelocityGraph.SmoothMode then
+                    d.RenderStepped:Wait()
+                else
+                    d.RenderStepped:Wait()
+                    d.RenderStepped:Wait()
+                end
+                    aL = workspace.CurrentCamera.ViewportSize.Y - 100
+                    aQ.Position =
+                        Vector2.new(
+                        workspace.CurrentCamera.ViewportSize.X / 2,
+                        workspace.CurrentCamera.ViewportSize.Y - 70
+                    )
+                    aR.Position =
+                        Vector2.new(
+                        workspace.CurrentCamera.ViewportSize.X / 2,
+                        workspace.CurrentCamera.ViewportSize.Y - 50
+                    )
+                    aP.Position =
+                        Vector2.new(
+                        workspace.CurrentCamera.ViewportSize.X / 2,
+                        workspace.CurrentCamera.ViewportSize.Y - 90
+                    )
+                if g.Character and g.Character.PrimaryPart then
+                    if #aK >= 1 then
+                        local M = 100
+                        if #aK >= M then
+                            aK[1]:Remove()
+                            local aT = 0
+                            for B = 2, 6 do
+                                aT = aT + 1.8
+                                aK[B].Transparency = 1 - aT / 10
+                            end
+                            aK[2].Transparency = 0.1
+                            aK[3].Transparency = 0.2
+                            aK[4].Transparency = 0.4
+                            aK[5].Transparency = 0.6
+                            aK[6].Transparency = 0.8
+                            table.remove(aK, 1)
+                        end
+                        for B, C in ipairs(aK) do
+                            C.To = C.To - Vector2.new(2, 0)
+                            C.From = C.From - Vector2.new(2, 0)
+                        end
+                    end
+                    local aU = (g.Character.PrimaryPart.Velocity * Vector3.new(1, 0, 1)).magnitude
+                    local aV = aU * 14.85
+                    if aV > 300 then
+                        aV = 300
+                    end
+                    aP.Color = Color3.new(1, 1, 1)
+                    if math.floor(aU) < aN then
+                        aP.Color = Color3.new(1, 0.5, 0.3)
+                    end
+                    if math.floor(aU) > aN then
+                        aP.Color = Color3.new(0.5, 1, 0.3)
+                    end
+                    if math.floor(aV) == 300 then
+                        aP.Color = Color3.new(1, 0.3, 0.1)
+                    end
+                    local aW = Color3.new(1, 1, 1)
+                    if aS.VelocityGraph.Color == "Rainbow" then
+                        aW = Color3.fromHSV(tick() % 5 / 5, 1, 1)
+                    elseif aS.VelocityGraph.Color == "Trans" then
+                        aW = aO[aS.VelocityGraph.TransCount]
+                        aS.VelocityGraph.DebounceCount =
+                            aS.VelocityGraph.DebounceCount == 5 and 0 or aS.VelocityGraph.DebounceCount + 1
+                    if aS.VelocityGraph.DebounceCount == 0 then
+                        aS.VelocityGraph.TransCount =
+                        aS.VelocityGraph.TransCount == #aO and 1 or aS.VelocityGraph.TransCount + 1
+                        end
+                    end
+                    local aX = Drawing.new("Line")
+                    table.insert(aK, aX)
+                    aX.Color = aW
+                    aX.Thickness = 1
+                    aX.From = Vector2.new(workspace.CurrentCamera.ViewportSize.X / 2 + 98, aM)
+                    aX.To = Vector2.new(workspace.CurrentCamera.ViewportSize.X / 2 + 100, aL - aV / 6.5)
+                    aX.Transparency = 0
+                    aX.Visible = true
+                    if #aK >= 8 then
+                        aK[#aK - 1].Transparency = aK[#aK - 1].Transparency + 0.2
+                        aK[#aK - 2].Transparency = aK[#aK - 2].Transparency + 0.2
+                        aK[#aK - 3].Transparency = aK[#aK - 3].Transparency + 0.2
+                        aK[#aK - 4].Transparency = aK[#aK - 4].Transparency + 0.2
+                        aK[#aK - 5].Transparency = aK[#aK - 5].Transparency + 0.2
+                        aK[#aK - 7].Transparency = 1
+                    end
+                    aP.Text = tostring(math.floor(aV))
+                    aM = aL - aV / 6.5
+                    aN = math.floor(aU)
+                end
+            end
+        end)
+    for B, C in next, aK do
+        C:Remove()
+    end
+    aK = {}
+end)		
 
 client:Element("Toggle", "trail", nil, function(tbl)
 	local trail_loop = tbl.Toggle
