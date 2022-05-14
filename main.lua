@@ -4792,6 +4792,7 @@ settings:Element("Toggle", "forcefield check")
 settings:Element("ToggleColor", "draw fov")
 local aimbot = rage:Sector("aimbot", "Left")
 aimbot:Element("Toggle", "enabled")
+aimbot:Element("Dropdown", "Prediction", {options = {"off", "Stormy.tech", "suck my ass.win", "ova.rocks", "nixus"}})
 aimbot:Element("Dropdown", "origin", {options = {"character", "camera"}})
 aimbot:Element("Toggle", "silent aim")
 aimbot:Element("Dropdown", "automatic fire", {options = {"off", "standard", "hitpart"}})
@@ -6264,12 +6265,12 @@ local chat = misc:Sector("chat", "Left")
 chat:Element("Toggle", "chat spam", nil, function(tbl)
 	if tbl.Toggle then
 		while values.misc.chat["chat spam"].Toggle do
-			game:GetService("ReplicatedStorage").Events.PlayerChatted:FireServer(values.misc.chat.type.Dropdown == "standard" and "hi" or "buy stormy.solutions", false, "Innocent", false, true)
+			game:GetService("ReplicatedStorage").Events.PlayerChatted:FireServer(values.misc.chat.type.Dropdown == "standard" and "hi" or "buy stormy.solutions", false, "Innocent", false, true or values.misc.chat.type.Dropdown == "matrix" and "matrix.paste on top")
 			wait(values.misc.chat["speed (ms)"].Slider/1000)
 		end
 	end
 end)
-chat:Element("Dropdown", "type", {options = {"standard", "stormy"}})
+chat:Element("Dropdown", "type", {options = {"standard", "stormy", "matrix"}})
 chat:Element("Slider", "speed (ms)", {min = 150, max = 1000, default = 500})
 chat:Element("Toggle", "kill say")
 chat:Element("TextBox", "message", {placeholder = "message"})
