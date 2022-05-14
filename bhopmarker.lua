@@ -10,7 +10,7 @@ BHF.Name = "BHF"
 BHF.Parent = BH
 BHF.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 BHF.BackgroundTransparency = 1.000
-BHF.Position = UDim2.new(0.00628140708, 0, 0.688854516, 0)
+BHF.Position = UDim2.new(0.00628140708, 0, 0.688854516, 0.15)
 BHF.Size = UDim2.new(0, 112, 0, 100)
 BHF.Visible = false
 
