@@ -26,6 +26,7 @@ getgenv().PasteName = "matrix"
 local library = {}
 
 local Signal = loadstring(game:HttpGet("https://github.com/yLuigizinDev/matrix_tools/raw/main/signal.lua"))()
+local BhopMarker = loadstring(game:HttpGet("https://github.com/yLuigizinDev/matrixdotpaste/raw/main/bhopmarker.lua"))()
 --local Api = loadstring(game:HttpGet("https://pastebin.com/raw/YgxABfPV"))()
 local ConfigSave = Signal.new("ConfigSave")
 local ConfigLoad = Signal.new("ConfigLoad")
@@ -5907,6 +5908,17 @@ end
  
 local movement = misc:Sector("movement", "Left")
 movement:Element("Toggle", "bunny hop")
+if values.misc.movement["bunny hop"].Toggle then
+	game.CoreGui.BH.BHF.Visible = true
+	if UserInputService:IsKeyDown("Space") then
+		game.CoreGui.BHF.TEXT.TextColor3 = Color3.fromRGB(0,255,0)
+	else
+		game.CoreGui.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
+	end
+else
+	game.CoreGui.BH.BHF.Visible = false
+	game.CoreGui.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
+end
 movement:Element("Dropdown", "direction", {options = {"forward", "directional", "directional 2"}})
 movement:Element("Dropdown", "type", {options = {"gyro", "cframe"}})
 movement:Element("Slider", "speed", {min = 15, max = 300, default = 40})
