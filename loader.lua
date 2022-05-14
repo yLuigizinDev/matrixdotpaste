@@ -10,6 +10,7 @@ local Close = Instance.new("TextButton")
 MatrixLoader.Name = "MatrixLoader"
 MatrixLoader.Parent = game.CoreGui
 MatrixLoader.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+MatrixLoader.ResetOnSpawn = false
 
 MatrixFrame.Name = "MatrixFrame"
 MatrixFrame.Parent = MatrixLoader
