@@ -5533,7 +5533,7 @@ client:Element("Toggle", "Spectators", nil, function(tbl)
     end
 end)
 
-client:Element("Toggle", "velocity graph", {graphLines, VelocityCounter}, function(tbl)
+client:Element("Toggle", "velocity graph", _1, _2, function(tbl)
 	if tbl.Toggle then
 		local Players = game:GetService("Players")
 		local RunService = game:GetService("RunService")
@@ -5554,6 +5554,9 @@ client:Element("Toggle", "velocity graph", {graphLines, VelocityCounter}, functi
 		VelocityCounter.Position = Vector2.new(CurrentCamera.ViewportSize.X/2, CurrentCamera.ViewportSize.Y-90)
 		VelocityCounter.Size = 20
 		VelocityCounter.Visible = true
+
+		_1 = graphLines
+		_2 = VelocityCounter
 
 		while true do
 		RunService.RenderStepped:Wait()
@@ -5641,8 +5644,8 @@ client:Element("Toggle", "velocity graph", {graphLines, VelocityCounter}, functi
 		end
 		end
 	else
-		VelocityCounter.Visible = false
-		graphLines.Visble = false
+		_2.Visible = false
+		_1.Visble = false
 	end
 end)		
 
