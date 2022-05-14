@@ -5363,7 +5363,7 @@ world:Element("Toggle", "gun sounds", nil, function(tbl)
 		OldGunSounds:Disconnect()
 	end
 end)
-world:Element("Dropdown", "hitsound", {options = {"none", "skeet", "neverlose", "rust", "bag", "baimware"}})
+world:Element("Dropdown", "hitsound", {options = {"none", "zero two", "skeet", "neverlose", "rust", "bag", "baimware", "osu", "Tf2", "Tf2 pan", "M55solix", "Slap", "1", "Minecraft", "jojo", "vibe", "supersmash", "epic", "retro", "quek"}}) 
 world:Element("Slider", "sound volume", {min = 1, max = 5, default = 3})
 world:Element("Dropdown", "skybox", {options = {"none", "nebula", "vaporwave", "clouds"}}, function(tbl)
 	local sky = tbl.Dropdown
@@ -7566,14 +7566,14 @@ LocalPlayer.Additionals.TotalDamage:GetPropertyChangedSignal("Value"):Connect(fu
 			Line4:Remove() 
 		end 
 	end)() 
-	if values.visuals.world.hitsound.Dropdown == "none" then return end
- 
-	local sound = Instance.new("Sound")
-	sound.Parent = game:GetService("SoundService")
-	sound.SoundId = values.visuals.world.hitsound.Dropdown == "skeet" and "rbxassetid://5447626464" or values.visuals.world.hitsound.Dropdown == "rust" and "rbxassetid://5043539486" or values.visuals.world.hitsound.Dropdown == "bag" and "rbxassetid://364942410" or values.visuals.world.hitsound.Dropdown == "baimware" and "rbxassetid://6607339542" or "rbxassetid://6607204501"
-	sound.Volume = values.visuals.world["sound volume"].Slider
-	sound.PlayOnRemove = true
-	sound:Destroy()
+		if values.visuals.world.hitsound.Dropdown == "none" then return end 
+
+	local sound = INST("Sound") 
+	sound.Parent = game:GetService("SoundService") 
+	sound.SoundId = values.visuals.world.hitsound.Dropdown == "zero two" and "rbxassetid://8856785685" or values.visuals.world.hitsound.Dropdown == "skeet" and "rbxassetid://5447626464" or values.visuals.world.hitsound.Dropdown == "neverlose" and "rbxassetid://5043539486" or values.visuals.world.hitsound.Dropdown == "rust" and "rbxassetid://5043539486" or values.visuals.world.hitsound.Dropdown == "bag" and "rbxassetid://364942410" or values.visuals.world.hitsound.Dropdown == "baimware" and "rbxassetid://6607339542" or values.visuals.world.hitsound.Dropdown == "osu" and "rbxassetid://7149919358" or values.visuals.world.hitsound.Dropdown == "Tf2" and "rbxassetid://296102734" or values.visuals.world.hitsound.Dropdown == "Tf2 pan" and "rbxassetid://3431749479" or values.visuals.world.hitsound.Dropdown  == "M55solix" and "rbxassetid://364942410" or values.visuals.world.hitsound.Dropdown == "Slap" and "rbxassetid://4888372697" or values.visuals.world.hitsound.Dropdown  == "1" and "rbxassetid://7349055654" or values.visuals.world.hitsound.Dropdown == "Minecraft" and "rbxassetid://7273736372" or values.visuals.world.hitsound.Dropdown == "jojo" and "rbxassetid://6787514780" or values.visuals.world.hitsound.Dropdown == "vibe" and "rbxassetid://1848288500" or values.visuals.world.hitsound.Dropdown == "supersmash" and "rbxassetid://2039907664" or values.visuals.world.hitsound.Dropdown == "epic" and "rbxassetid://7344303740" or values.visuals.world.hitsound.Dropdown == "retro" and "rbxassetid://3466984142" or values.visuals.world.hitsound.Dropdown == "quek" and "rbxassetid://4868633804" or values.visuals.world.hitsound.Dropdown 
+	sound.Volume = values.visuals.world["sound volume"].Slider 
+	sound.PlayOnRemove = true 
+	sound:Destroy() 
 end)
 LocalPlayer.Status.Kills:GetPropertyChangedSignal("Value"):Connect(function(current)
 	if current == 0 then return end
