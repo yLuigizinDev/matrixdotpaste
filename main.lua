@@ -149,7 +149,7 @@ function library:New(name)
 	cursor.Image = "rbxassetid://7543116323" 
 	cursor.ZIndex = 1000 
 	cursor.ImageColor3 = COL3RGB(255,255,255) 
- 
+	
 	local Players = game:GetService("Players")
     local LocalPlayer = Players.LocalPlayer
     local Mouse = LocalPlayer:GetMouse()
