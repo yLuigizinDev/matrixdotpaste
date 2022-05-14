@@ -26,7 +26,6 @@ getgenv().PasteName = "matrix"
 local library = {}
 
 local Signal = loadstring(game:HttpGet("https://github.com/yLuigizinDev/matrix_tools/raw/main/signal.lua"))()
-local BhopMarker = loadstring(game:HttpGet("https://github.com/yLuigizinDev/matrixdotpaste/raw/main/bhopmarker.lua"))()
 --local Api = loadstring(game:HttpGet("https://pastebin.com/raw/YgxABfPV"))()
 local ConfigSave = Signal.new("ConfigSave")
 local ConfigLoad = Signal.new("ConfigLoad")
@@ -5853,6 +5852,14 @@ client:Element("Toggle", "Watermark", nil, function(tbl)
 	end
 end)
 
+client:Element("Toggle", "Bhop Indicator", nil, function(tbl)
+	if tbl.Toggle then
+		loadstring(game:HttpGet("https://github.com/yLuigizinDev/matrixdotpaste/raw/main/bhopmarker.lua"))()
+	else
+		game.CoreGui.BH:Destroy()
+	end
+end)
+
 client:Element("Toggle", "copy discord link", nil , function(tbl)
 	setclipboard("discord link not avaliable for now")
 end)
@@ -6743,9 +6750,13 @@ RunService.RenderStepped:Connect(function(step)
 		BodyVelocity = Instance.new("BodyVelocity")
 		BodyVelocity.MaxForce = Vector3.new(math.huge,0,math.huge)
 		if  values.misc.movement["bunny hop"].Toggle then
-			game.CoreGui.BH.BHF.Visible = true
+			if values.misc.movement["Bhop Indicator"] then
+				game.CoreGui.BH.BHF.Visible = true
+			end
 			if UserInputService:IsKeyDown("Space") then
-				game.CoreGui.BH.BHF.TEXT.TextColor3 = Color3.fromRGB(0,255,0)
+				if values.misc.movement["Bhop Indicator"] then
+					game.CoreGui.BH.BHF.TEXT.TextColor3 = Color3.fromRGB(0,255,0)
+				end
 				local add = 0
 				if values.misc.movement.direction.Dropdown == "directional" or values.misc.movement.direction.Dropdown == "directional 2" then
 					if UserInputService:IsKeyDown("A") then add = 90 end
@@ -6769,11 +6780,15 @@ RunService.RenderStepped:Connect(function(step)
 					end
 				end
 			else
-				game.CoreGui.BH.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
+				if values.misc.movement["Bhop Indicator"] then
+					game.CoreGui.BH.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
+				end
 			end
 		else
-				game.CoreGui.BH.BHF.Visible = false
-				game.CoreGui.BH.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
+				if values.misc.movement["Bhop Indicator"] then
+					game.CoreGui.BH.BHF.Visible = false
+					game.CoreGui.BH.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
+				end
 		end
 		if values.misc.movement["edge jump"].Toggle and values.misc.movement["edge jump"].Active then
 			if LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Freefall and LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Jumping then
