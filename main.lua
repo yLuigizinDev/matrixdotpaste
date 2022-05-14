@@ -5533,18 +5533,19 @@ client:Element("Toggle", "Spectators", nil, function(tbl)
     end
 end)
 
-client:Element("Toggle", "velocity graph", {}, function(tbl)
-	local VelocityCounter = Drawing.new("Text")
-	local graphLines = {}
+client:Element("Toggle", "velocity graph", {graphLines, VelocityCounter}, function(tbl)
 	if tbl.Toggle then
 		local Players = game:GetService("Players")
 		local RunService = game:GetService("RunService")
 		local LocalPlayer = Players.LocalPlayer
 		local CurrentCamera = workspace.CurrentCamera
 
+		local graphLines = {}
 		local standardY = workspace.CurrentCamera.ViewportSize.Y-100
 		local oldY = standardY
 		local oldVelo = 0
+
+		local VelocityCounter = Drawing.new("Text")
 		VelocityCounter.Text = ""
 		VelocityCounter.Center = true
 		VelocityCounter.Outline = true
