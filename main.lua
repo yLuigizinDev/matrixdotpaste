@@ -10,11 +10,36 @@ Duration = 5; --
 
 task.wait(0.5)
 
-local Hint = Instance.new("Hint", game.CoreGui)
-Hint.Text = "Loading matrix.paste"
+text = Drawing.new('Text');
+text.Text = 'Loading matrix.paste';
+text.Color = Color3.fromRGB(0,255,0); -- white text
+text.OutlineColor = Color3.new(0, 0, 0); -- black outline
+text.Center = true; -- center text
+text.Outline = true;
+text.Position = Vector2.new(100, 100);
+text.Size = 20; -- font size
+text.Font = Drawing.Fonts.Monospace; -- 'UI', 'System', 'Plex', 'Monospace'
+text.Transparency = 0.9;
 
-task.wait(1)
-Hint:Destroy()
+task.wait(2)
+
+text:Remove()
+
+text2 = Drawing.new('Text');
+text2.Text = 'Loading sucessfull';
+text2.Color = Color3.fromRGB(0,255,0); -- white text
+text2.OutlineColor = Color3.new(0, 0, 0); -- black outline
+text2.Center = true; -- center text
+text2.Outline = true;
+text2.Position = Vector2.new(100, 100);
+text2.Size = 20; -- font size
+text2.Font = Drawing.Fonts.Monospace; -- 'UI', 'System', 'Plex', 'Monospace'
+text2.Transparency = 0.9;
+
+task.wait(1.5)
+
+text2:Remove()
+
 task.wait(0.1)
 
 getgenv().values = {}
@@ -6092,7 +6117,7 @@ client:Element("Toggle", "Watermark", nil, function(tbl)
 	end
 end)
 
-client:Element("Toggle", "copy discord link", nil , function(tbl)
+client:Element("Button", "copy discord link", nil , function(tbl)
 	setclipboard("discord link not avaliable for now")
 end)
 
