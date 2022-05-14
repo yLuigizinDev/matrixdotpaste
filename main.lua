@@ -152,7 +152,6 @@ function library:New(name)
  
     game:GetService("RunService").RenderStepped:connect(function()
         cursor.Visible = matrixGui.Enabled
-        cursor.Position = UDim2.new(0,Mouse.X-3,0,Mouse.Y+1)
     end)
  
 	Menu.Name = "Menu"
