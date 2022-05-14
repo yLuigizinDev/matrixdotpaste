@@ -6047,7 +6047,58 @@ movement:Element("Slider", "speed", {min = 15, max = 300, default = 40})
 movement:Element("ToggleKeybind", "jump bug")
 movement:Element("ToggleKeybind", "edge jump")
 movement:Element("ToggleKeybind", "edge bug")
- 
+local noclip = misc:Sector("noclip", "Left")
+		noclip:Element("ToggleKeybind", "noclip", {}, function(tbl)
+			if tbl.Toggle and tbl.Active and LocalPlayer.Character then
+				Fly = game:GetService("RunService").Stepped:Connect(function()
+					spawn(function()
+						pcall(function()
+							local speed = values.misc.noclip["noclip speed"].Slider * 8
+							local velocity = Vector3.new(0, 1, 0)
+	
+							if UserInputService:IsKeyDown(Enum.KeyCode.W) then
+								velocity = velocity + (Camera.CoordinateFrame.lookVector * speed)
+							end
+							if UserInputService:IsKeyDown(Enum.KeyCode.A) then
+								velocity = velocity + (Camera.CoordinateFrame.rightVector * -speed)
+							end
+							if UserInputService:IsKeyDown(Enum.KeyCode.S) then
+								velocity = velocity + (Camera.CoordinateFrame.lookVector * -speed)
+							end
+							if UserInputService:IsKeyDown(Enum.KeyCode.D) then
+								velocity = velocity + (Camera.CoordinateFrame.rightVector * speed)
+							end
+								
+							LocalPlayer.Character.HumanoidRootPart.Velocity = velocity
+							LocalPlayer.Character.Humanoid.PlatformStand = true
+						end)
+					end)
+				end)
+	
+				Noclip = game:GetService("RunService").Stepped:Connect(function()
+					for i,v in pairs(LocalPlayer.Character:GetChildren()) do
+						if v:IsA("BasePart") and v.CanCollide == true then
+							v.CanCollide = false
+						end
+					end
+				end)
+			else
+				pcall(function()
+					Fly:Disconnect()
+					Noclip:Disconnect()
+					LocalPlayer.Character.HumanoidRootPart.Velocity = -2.90707, 0.00781632, -11.7204
+					LocalPlayer.Character.Humanoid.PlatformStand = false
+					for i,v in pairs(LocalPlayer.Character:GetChildren()) do
+						if v:IsA("BasePart") and v.CanCollide == false then
+							v.CanCollide = true
+						end
+					end
+				end)
+			end
+		end)
+	
+		noclip:Element("Slider", "noclip speed", {min = 1, max = 25, default = 1})
+
 local chat = misc:Sector("chat", "Left")
 chat:Element("Toggle", "chat spam", nil, function(tbl)
 	if tbl.Toggle then
