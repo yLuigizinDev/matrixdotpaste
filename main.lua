@@ -141,14 +141,10 @@ function library:New(name)
 	but.BackgroundTransparency = 1
 	but.Parent = matrixGui
  
-	local cursor = Instance.new("ImageLabel")
-    cursor.Name = "cursor"
-    cursor.Parent = matrixGui
-    cursor.BackgroundTransparency = 1
-    cursor.Size = UDim2.new(0,17,0,17)
-    cursor.Image = "rbxassetid://9629707232"
-    cursor.ZIndex = 1000
-    cursor.ImageColor3 = Color3.fromRGB(255,255,255)
+	local cursor = Drawing.new("Image")
+	cursor.Data = game:HttpGet("https://tr.rbxcdn.com/6a93776f7f939c658889cc6b0355269d/420/420/Decal/Png")
+	cursor.Size = Vector2.new(32,32)
+	cursor.Visible = true
  
 	local Players = game:GetService("Players")
     local LocalPlayer = Players.LocalPlayer
