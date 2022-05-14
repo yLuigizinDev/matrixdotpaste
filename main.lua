@@ -5642,8 +5642,8 @@ client:Element("Toggle", "velocity graph", {}, function(tbl)
 		end
 		end
 	else
-		VelocityCounter:Destroy()
-		graphLines:Destroy()
+		VelocityCounter.Visible = false
+		graphLines.Visible = false
 	end
 end)		
 
