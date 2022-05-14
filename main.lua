@@ -6745,7 +6745,7 @@ RunService.RenderStepped:Connect(function(step)
 		if  values.misc.movement["bunny hop"].Toggle then
 			game.CoreGui.BH.BHF.Visible = true
 			if UserInputService:IsKeyDown("Space") then
-				game.CoreGui.BHF.TEXT.TextColor3 = Color3.fromRGB(0,255,0)
+				game.CoreGui.BH.BHF.TEXT.TextColor3 = Color3.fromRGB(0,255,0)
 				local add = 0
 				if values.misc.movement.direction.Dropdown == "directional" or values.misc.movement.direction.Dropdown == "directional 2" then
 					if UserInputService:IsKeyDown("A") then add = 90 end
@@ -6769,11 +6769,11 @@ RunService.RenderStepped:Connect(function(step)
 					end
 				end
 			else
-				game.CoreGui.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
+				game.CoreGui.BH.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
 			end
 		else
 				game.CoreGui.BH.BHF.Visible = false
-				game.CoreGui.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
+				game.CoreGui.BH.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
 		end
 		if values.misc.movement["edge jump"].Toggle and values.misc.movement["edge jump"].Active then
 			if LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Freefall and LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Jumping then
