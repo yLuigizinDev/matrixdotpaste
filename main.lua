@@ -5533,7 +5533,7 @@ client:Element("Toggle", "Spectators", nil, function(tbl)
     end
 end)
 
-client:Element("Toggle", "velocity graph", _1, _2, function(tbl)
+client:Element("Toggle", "velocity graph", {}, function(tbl)
 	if tbl.Toggle then
 		local Players = game:GetService("Players")
 		local RunService = game:GetService("RunService")
@@ -5555,8 +5555,6 @@ client:Element("Toggle", "velocity graph", _1, _2, function(tbl)
 		VelocityCounter.Size = 20
 		VelocityCounter.Visible = true
 
-		_1 = graphLines
-		_2 = VelocityCounter
 
 		while true do
 		RunService.RenderStepped:Wait()
@@ -5644,8 +5642,8 @@ client:Element("Toggle", "velocity graph", _1, _2, function(tbl)
 		end
 		end
 	else
-		_2.Visible = false
-		_1.Visble = false
+		VelocityCounter:Destroy()
+		graphLines:Destroy()
 	end
 end)		
 
