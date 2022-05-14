@@ -4796,7 +4796,8 @@ aimbot:Element("Dropdown", "origin", {options = {"character", "camera"}})
 aimbot:Element("Toggle", "silent aim")
 aimbot:Element("Dropdown", "automatic fire", {options = {"off", "standard", "hitpart"}})
 aimbot:Element("Toggle", "automatic penetration")
-aimbot:Element("Jumbobox", "resolver", {options = {"pitch", "front track", "roll", "animation", "head"}})
+aimbot:Element("Jumbobox", "resolver", {options = {"pitch", "front track", "roll", "animation", "head"}})   
+aimbot:Element("Toggle", "Hitbox Manipulation") 
 aimbot:Element("Toggle", "delay shot")
 aimbot:Element("Toggle", "force hit")
 aimbot:Element("Dropdown", "prediction", {options = {"off", "cframe", "velocity"}})
@@ -7547,6 +7548,11 @@ mt.__namecall = function(self, ...)
 				end
 			end)()
 		end
+
+				if values.rage.aimbot["Hitbox Manipulation"].Toggle then      
+					args[1] = RageTarget      
+					args[2] = RageTarget.Position      
+				end
 
 		if (values.rage.aimbot["prediction boost"].Toggle and RageTarget ~= nil) then      
 			coroutine.wrap(function()      
