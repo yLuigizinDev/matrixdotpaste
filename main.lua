@@ -141,10 +141,14 @@ function library:New(name)
 	but.BackgroundTransparency = 1
 	but.Parent = matrixGui
  
-	local cursor = Drawing.new("Image")
-	cursor.Data = game:HttpGet("https://tr.rbxcdn.com/6a93776f7f939c658889cc6b0355269d/420/420/Decal/Png")
-	cursor.Size = Vector2.new(32,32)
-	cursor.Visible = true
+	local cursor = INST("ImageLabel") 
+	cursor.Name = "cursor" 
+	cursor.Parent = Ksen 
+	cursor.BackgroundTransparency = 1 
+	cursor.Size = UDIM2(0,64,0,64) 
+	cursor.Image = "rbxassetid://7543116323" 
+	cursor.ZIndex = 1000 
+	cursor.ImageColor3 = COL3RGB(255,255,255) 
  
 	local Players = game:GetService("Players")
     local LocalPlayer = Players.LocalPlayer
@@ -152,6 +156,7 @@ function library:New(name)
  
     game:GetService("RunService").RenderStepped:connect(function()
         cursor.Visible = matrixGui.Enabled
+		cursor.Position = UDIM2(0,Mouse.X-32,0,Mouse.Y-28) 
     end)
  
 	Menu.Name = "Menu"
