@@ -5533,18 +5533,19 @@ client:Element("Toggle", "Spectators", nil, function(tbl)
     end
 end)
 
-client:Element("Toggle", "velocity graph", {}, function(tbl)
-	local VelocityCounter = Drawing.new("Text")
-	local line = Drawing.new("Line")
-	local graphLines = {}
+client:Element("Toggle", "velocity graph", {}, function(tbl, graphLines, VelocityCounter)
 	if tbl.Toggle then
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
 	local LocalPlayer = Players.LocalPlayer
 	local CurrentCamera = workspace.CurrentCamera
+	
+	local graphLines = {}
 	local standardY = workspace.CurrentCamera.ViewportSize.Y-100
 	local oldY = standardY
 	local oldVelo = 0
+	
+	local VelocityCounter = Drawing.new("Text")
 	VelocityCounter.Text = ""
 	VelocityCounter.Center = true
 	VelocityCounter.Outline = true
@@ -5614,6 +5615,8 @@ client:Element("Toggle", "velocity graph", {}, function(tbl)
 	
 	--color = Color3.fromHSV(tick()%5/5,1,1)
 	
+	local line = Drawing.new("Line")
+	
 	table.insert(graphLines, line)
 	
 	line.Color = color
@@ -5640,9 +5643,8 @@ client:Element("Toggle", "velocity graph", {}, function(tbl)
 	else
 	VelocityCounter.Visible = false
 	graphLines.Visble = false
-	print("nigerian test")
 	end
-end)		
+	end)		
 
 client:Element("Toggle", "trail", nil, function(tbl)
 	local trail_loop = tbl.Toggle
