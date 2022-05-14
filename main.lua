@@ -5114,6 +5114,11 @@ effects:Element("ToggleTrans", "arm chams", {default = {Color = Color3.fromRGB(2
 		LArm.Transparency = 0
 	end
 end)
+
+effects:Element("Slider", "Arms Transparency", {min = 0, max = 100, default = 0}, function(val)
+	Camera.Arms.Transparency = values.visuals.effects["Arms Transparency"].Slider / 100
+end)
+
 effects:Element("Jumbobox", "removals", {options = {"scope", "scope lines", "flash", "smoke", "decals", "shadows", "clothes"}}, function(val)
 	local tbl = val.Jumbobox
 	if table.find(tbl, "decals") then
