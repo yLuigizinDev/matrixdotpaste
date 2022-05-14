@@ -4,7 +4,7 @@ local TEXT = Instance.new("TextLabel")
 
 BH.Name = "BH"
 BH.Parent = game.CoreGui
-BH.ZIndexBehavior = Enum.ZIndexBehavior.Global
+BH.ResetOnSpawn = false
 
 BHF.Name = "BHF"
 BHF.Parent = BH
