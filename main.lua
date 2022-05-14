@@ -7296,60 +7296,60 @@ Crosshair:GetPropertyChangedSignal("Visible"):Connect(function(current)
 end)
  
 LocalPlayer.Additionals.TotalDamage:GetPropertyChangedSignal("Value"):Connect(function(current)
-	if current == 0 then return end
-	coroutine.wrap(function()
-		if values.misc.client.hitmarker.Toggle then
-			local Line = Drawing.new("Line")
-			local Line2 = Drawing.new("Line")
-			local Line3 = Drawing.new("Line")
-			local Line4 = Drawing.new("Line")
- 
-			local x, y = Camera.ViewportSize.X/2, Camera.ViewportSize.Y/2
- 
-			Line.From = Vector2.new(x + 4, y + 4)
-			Line.To = Vector2.new(x + 10, y + 10)
-			Line.Color = values.misc.client.hitmarker.Color
+	if current == 0 then return end 
+	coroutine.wrap(function() 
+		if values.misc.client.hitmarker.Toggle then 
+			local Line = Drawing.new("Line") 
+			local Line2 = Drawing.new("Line") 
+			local Line3 = Drawing.new("Line") 
+			local Line4 = Drawing.new("Line") 
+
+			local x, y = Camera.ViewportSize.X/2, Camera.ViewportSize.Y/2 
+
+			Line.From = Vec2(x + 4, y + 4) 
+			Line.To = Vec2(x + 10, y + 10) 
+			Line.Color = values.misc.client.hitmarker.Color 
 			Line.Visible = true 
- 
-			Line2.From = Vector2.new(x + 4, y - 4)
-			Line2.To = Vector2.new(x + 10, y - 10)
-			Line2.Color = values.misc.client.hitmarker.Color
+
+			Line2.From = Vec2(x + 4, y - 4) 
+			Line2.To = Vec2(x + 10, y - 10) 
+			Line2.Color = values.misc.client.hitmarker.Color 
 			Line2.Visible = true 
- 
-			Line3.From = Vector2.new(x - 4, y - 4)
-			Line3.To = Vector2.new(x - 10, y - 10)
-			Line3.Color = values.misc.client.hitmarker.Color
+
+			Line3.From = Vec2(x - 4, y - 4) 
+			Line3.To = Vec2(x - 10, y - 10) 
+			Line3.Color = values.misc.client.hitmarker.Color 
 			Line3.Visible = true 
- 
-			Line4.From = Vector2.new(x - 4, y + 4)
-			Line4.To = Vector2.new(x - 10, y + 10)
-			Line4.Color = values.misc.client.hitmarker.Color
-			Line4.Visible = true
- 
-			Line.Transparency = 1
-			Line2.Transparency = 1
-			Line3.Transparency = 1
-			Line4.Transparency = 1
- 
-			Line.Thickness = 1
-			Line2.Thickness = 1
-			Line3.Thickness = 1
-			Line4.Thickness = 1
- 
-			wait(0.3)
-			for i = 1,0,-0.1 do
-				wait()
+
+			Line4.From = Vec2(x - 4, y + 4) 
+			Line4.To = Vec2(x - 10, y + 10) 
+			Line4.Color = values.misc.client.hitmarker.Color 
+			Line4.Visible = true 
+
+			Line.Transparency = 1 
+			Line2.Transparency = 1 
+			Line3.Transparency = 1 
+			Line4.Transparency = 1 
+
+			Line.Thickness = 1 
+			Line2.Thickness = 1 
+			Line3.Thickness = 1 
+			Line4.Thickness = 1 
+
+			wait(0.3) 
+			for i = 1,0,-0.1 do 
+				wait() 
 				Line.Transparency = i 
-				Line2.Transparency = i
-				Line3.Transparency = i
-				Line4.Transparency = i
-			end
-			Line:Remove()
-			Line2:Remove()
-			Line3:Remove()
-			Line4:Remove()
-		end
-	end)()
+				Line2.Transparency = i 
+				Line3.Transparency = i 
+				Line4.Transparency = i 
+			end 
+			Line:Remove() 
+			Line2:Remove() 
+			Line3:Remove() 
+			Line4:Remove() 
+		end 
+	end)() 
 	if values.visuals.world.hitsound.Dropdown == "none" then return end
  
 	local sound = Instance.new("Sound")
