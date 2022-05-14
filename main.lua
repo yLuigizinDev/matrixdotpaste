@@ -4680,6 +4680,25 @@ AddRage(auto)
  
 local antiaim = rage:Sector("angles", "Right")
 antiaim:Element("Toggle", "enabled")
+local Client = getsenv(game.Players.LocalPlayer.PlayerGui.Client)
+fakeduckloop = false  
+antiaim:Element("Toggle", "fake duck",{},function(tbl)
+	fakeduckloop = tbl.Toggle
+	while fakeduckloop and syn do
+		pcall(function()
+			wait(1)
+			local Client = getsenv(game.Players.LocalPlayer.PlayerGui.Client)
+			local CrouchAnim = nil
+			for i,v in pairs(debug.getupvalues(Client.setcharacter)) do
+				if type(v) == "userdata" and v.ClassName == "AnimationTrack" and v.Name == "Idle" then
+					CrouchAnim = v																																																																																																																																																																																																																																																																																																																																																						-- this_was_pasted_from_mexicanhook
+				end
+			end
+
+			CrouchAnim:Play()
+		end)
+	end
+end)    
 antiaim:Element("Dropdown", "yaw base", {options = {"camera", "targets", "spin", "random"}})
 antiaim:Element("Slider", "yaw offset", {min = -180, max = 180, default = 0})
 antiaim:Element("Toggle", "jitter")
@@ -5513,6 +5532,120 @@ client:Element("Toggle", "Spectators", nil, function(tbl)
         game.CoreGui.SpectatorsList:Destroy()
     end
 end)
+
+client:Element("Toggle", "velocity graph", {}, function(tbl)
+	if tbl.Toggle then
+	local Players = game:GetService("Players")
+	local RunService = game:GetService("RunService")
+	local LocalPlayer = Players.LocalPlayer
+	local CurrentCamera = workspace.CurrentCamera
+	
+	local graphLines = {}
+	local standardY = workspace.CurrentCamera.ViewportSize.Y-100
+	local oldY = standardY
+	local oldVelo = 0
+	
+	local VelocityCounter = Drawing.new("Text")
+	VelocityCounter.Text = ""
+	VelocityCounter.Center = true
+	VelocityCounter.Outline = true
+	VelocityCounter.Color = Color3.new(1,1,1)
+	VelocityCounter.Font = 3
+	VelocityCounter.Position = Vector2.new(CurrentCamera.ViewportSize.X/2, CurrentCamera.ViewportSize.Y-90)
+	VelocityCounter.Size = 20
+	VelocityCounter.Visible = true
+	
+	while true do
+	RunService.RenderStepped:Wait()
+	
+	standardY = CurrentCamera.ViewportSize.Y-100
+	VelocityCounter.Position = Vector2.new(CurrentCamera.ViewportSize.X/2,CurrentCamera.ViewportSize.Y-90)
+	
+	if LocalPlayer.Character and LocalPlayer.Character.PrimaryPart then
+	if #graphLines >= 1 then
+	local max = 100
+	
+	if #graphLines >= max then
+		graphLines[1]:Remove()
+		
+		local counter = 0
+	
+		for i=2,6 do
+			counter = counter + 1.8
+			graphLines[i].Transparency = 1 - (counter/10)
+		end
+		
+		graphLines[2].Transparency = 0.1
+		graphLines[3].Transparency = 0.2
+		graphLines[4].Transparency = 0.4
+		graphLines[5].Transparency = 0.6
+		graphLines[6].Transparency = 0.8
+		
+		table.remove(graphLines, 1)
+	end
+	
+	for i,v in pairs(graphLines) do
+		v.To = v.To - Vector2.new(2,0)
+		v.From = v.From - Vector2.new(2,0)
+	end
+	end
+	
+	local totalVelo = (LocalPlayer.Character.PrimaryPart.Velocity * Vector3.new(1, 0, 1)).magnitude
+	local graphVelocity = totalVelo * 14.85
+	--[[
+	if graphVelocity > 300 then
+	graphVelocity = 300
+	end
+	--]]
+	VelocityCounter.Color = Color3.new(1,1,1)
+	
+	if math.floor(totalVelo) < oldVelo then
+	VelocityCounter.Color = Color3.new(1,0.5,0.3)
+	end
+	
+	if math.floor(totalVelo) > oldVelo then
+	VelocityCounter.Color = Color3.new(0.5,1,0.3)
+	end
+	--[[
+	if math.floor(graphVelocity) == 300 then
+	VelocityCounter.Color = Color3.new(1,0.3,0.1)
+	end
+	--]]
+	local color = Color3.new(1,1,1)
+	
+	--color = Color3.fromHSV(tick()%5/5,1,1)
+	
+	local line = Drawing.new("Line")
+	
+	table.insert(graphLines, line)
+	
+	line.Color = color
+	line.Thickness = 2
+	line.From = Vector2.new(CurrentCamera.ViewportSize.X/2 + 98, oldY)
+	line.To = Vector2.new(CurrentCamera.ViewportSize.X/2 + 100, standardY - (graphVelocity/6.5))
+	line.Transparency = 0
+	line.Visible = true
+	
+	if #graphLines >= 8 then
+	graphLines[#graphLines-1].Transparency = graphLines[#graphLines-1].Transparency + 0.2
+	graphLines[#graphLines-2].Transparency = graphLines[#graphLines-2].Transparency + 0.2
+	graphLines[#graphLines-3].Transparency = graphLines[#graphLines-3].Transparency + 0.2
+	graphLines[#graphLines-4].Transparency = graphLines[#graphLines-4].Transparency + 0.2
+	graphLines[#graphLines-5].Transparency = graphLines[#graphLines-5].Transparency + 0.2
+	graphLines[#graphLines-7].Transparency = 1
+	end
+	
+	VelocityCounter.Text = tostring(math.floor(graphVelocity))
+	oldY = standardY - (graphVelocity/6.5)
+	oldVelo = math.floor(totalVelo)
+	end
+	end
+	else
+	VelocityCounter.Visible = false
+	graphLines.Visble = false
+	print("nigerian test")
+	end
+	end)		
 
 client:Element("Toggle", "trail", nil, function(tbl)
 	local trail_loop = tbl.Toggle
