@@ -5116,8 +5116,11 @@ effects:Element("ToggleTrans", "arm chams", {default = {Color = Color3.fromRGB(2
 end)
 
 effects:Element("Slider", "Arms Transparency", {min = 0, max = 100, default = 0}, function(val)
-	RArm.Transparency = values.visuals.effects["Arms Transparency"].Slider / 100
-	LArm.Transparency = values.visuals.effects["Arms Transparency"].Slider / 100
+	for i,v in pairs(workspace.CurrentCamera:GetChildren()) do
+            if not table.find({"Right Arm", "Left Arm"}, v.Name) then
+			v.Transparency = values.visuals.effects["Arms Transparency"].Slider/100
+		end
+	end
 end)
 
 effects:Element("Jumbobox", "removals", {options = {"scope", "scope lines", "flash", "smoke", "decals", "shadows", "clothes"}}, function(val)
