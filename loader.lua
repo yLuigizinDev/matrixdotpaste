@@ -97,7 +97,7 @@ Close.TextSize = 14.000
 Close.TextWrapped = true
 Close.MouseButton1Click:Connect(
     function()
-        MatrixLoader:Destroy()
+        game.CoreGui.MatrixLoader:Destroy()
     end
 )
 
