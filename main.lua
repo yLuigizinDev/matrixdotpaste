@@ -6484,8 +6484,7 @@ chat:Element("TextBox", "message", {placeholder = "message"})
 chat:Element("Toggle", "no filter")
 
 
-local Notification = Instance.new("ScreenGui") do
-	local NotificationFrame = Instance.new("Frame")
+local NotificationFrame = Instance.new("Frame")
 	local UIListLayout = Instance.new("UIListLayout")
 	local SampleFrame = Instance.new("Frame")
 	local Grad = Instance.new("Frame")
@@ -6543,7 +6542,6 @@ local Notification = Instance.new("ScreenGui") do
 	UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(49, 49, 49)), ColorSequenceKeypoint.new(0.41, Color3.fromRGB(25, 25, 25)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(25, 25, 25))}
 	UIGradient.Rotation = 90
 	UIGradient.Parent = SampleFrame
-	end
 	 
 	local function CreateHitElement(text,col,time, size, size2, size3, size4) 
 		spawn(function()
