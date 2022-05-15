@@ -4628,6 +4628,7 @@ local visuals = gui:Tab("visuals")
 local misc = gui:Tab("misc")
 local skins = gui:Tab("skins")
 local luas = gui:Tab("luas")
+local different = gui:Tab("different") 
  
 getgenv().api = {}
 api.newtab = function(name)
@@ -4639,6 +4640,85 @@ end
 api.newelement = function(section, type, name, data, callback)
 	section:Element(type, name, data, callback)
 end
+
+local Troll = different:Sector("Troll", "Left")
+Troll:Element("Button", "Plant C4",{}, function()
+	print("pressed")
+	pcall(function()
+		if IsAlive(LocalPlayer) and workspace.Map.Gamemode.Value == "defusal" and workspace.Status.Preparation.Value == false and not planting then 
+			planting = true
+			local pos = LocalPlayer.Character.HumanoidRootPart.CFrame 
+			workspace.CurrentCamera.CameraType = "Fixed"
+			LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Map.SpawnPoints.C4Plant.CFrame
+			wait(0.2)
+			game.ReplicatedStorage.Events.PlantC4:FireServer((pos + Vector3.new(0, -2.75, 0)) * CFrame.Angles(math.rad(90), 0, math.rad(180)), GetSite())
+			wait(0.2)
+			LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+			LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+			game.Workspace.CurrentCamera.CameraType = "Custom"
+			planting = false
+		end
+		end)
+end)
+Troll:Element('Button', 'Defuse C4',{}, function()
+	pcall(function()
+		if IsAlive(LocalPlayer) and workspace.Map.Gamemode.Value == "defusal" and not defusing and workspace:FindFirstChild("C4") then 
+			defusing = true
+			LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+			local pos = LocalPlayer.Character.HumanoidRootPart.CFrame 
+			workspace.CurrentCamera.CameraType = "Fixed"
+			LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.C4.Handle.CFrame + Vector3.new(0, 2, 0)
+			LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+			wait(0.1)
+			LocalPlayer.Backpack.PressDefuse:FireServer(workspace.C4)
+			LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+			wait(0.25)
+			if IsAlive(LocalPlayer) and workspace:FindFirstChild("C4") and workspace.C4:FindFirstChild("Defusing") and workspace.C4.Defusing.Value == LocalPlayer then
+				LocalPlayer.Backpack.Defuse:FireServer(workspace.C4)
+			end
+			LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+			wait(0.2)
+			LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+			LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+			LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+			game.Workspace.CurrentCamera.CameraType = "Custom"
+			defusing = false
+		end
+		end)
+end)
+
+local weird = different:Sector("weird", "Left")
+
+        weird:Element("Button", "Hostage Spoofer", {}, function()
+			local ReplicatedStorage = game:GetService("ReplicatedStorage");
+			local ApplyGun = ReplicatedStorage.Events.ApplyGun;
+			ApplyGun:FireServer({
+				Model = ReplicatedStorage.Hostage.Hostage,
+				Name = "USP"
+			}, game.Players.LocalPlayer);
+		end)
+		weird:Element("Button", "RageBot Breaker", {}, function()
+			LocalPlayer.Character.UpperTorso.Waist:Destroy()
+		end)
+		weird:Element("Button", "Rejoin", {}, function()
+			game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, LocalPlayer)
+		end)
+		weird:Element("Toggle", "md") 
+
+		local parametres = different:Sector("parametres", "Right")
+		--[[parametres:Element("Toggle", "up")
+		parametres:Element("Slider", "1up", {min = -10, max = 10, default = 0})
+		parametres:Element("Slider", "2up", {min = -10, max = 10, default = 0})
+		parametres:Element("Slider", "3up", {min = -10, max = 10, default = 0})
+		parametres:Element("Toggle", "down")
+		parametres:Element("Slider", "1down", {min = -10, max = 10, default = 0})
+		parametres:Element("Slider", "2down", {min = -10, max = 10, default = 0})
+		parametres:Element("Slider", "3down", {min = -10, max = 10, default = 0})]]
+
+		parametres:Element("Toggle", "character")
+		parametres:Element("Slider", "1", {min = -10, max = 10, default = 0})
+		parametres:Element("Slider", "2", {min = -10, max = 10, default = 0})
+		parametres:Element("Slider", "3", {min = -10, max = 10, default = 0})
  
  
 local luascripts = luas:Sector("lua scripts", "Left")
