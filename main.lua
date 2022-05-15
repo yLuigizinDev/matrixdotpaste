@@ -95,6 +95,8 @@ local TBLFIND = table.find
 local TBLREMOVE = table.remove 
 local TBLSORT = table.sort 
 
+workspace.InterpolationThrottling = Enum.InterpolationThrottlingMode.Disabled
+
 function rgbtotbl(rgb)
 	return {R = rgb.R, G = rgb.G, B = rgb.B}
 end
