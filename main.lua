@@ -4795,7 +4795,6 @@ settings:Element("Toggle", "forcefield check")
 settings:Element("ToggleColor", "draw fov")
 local aimbot = rage:Sector("aimbot", "Left")
 aimbot:Element("Toggle", "enabled")
-aimbot:Element("Dropdown", "Prediction", {options = {"off", "Stormy.tech", "suck my ass.win", "ova.rocks", "nixus"}})
 aimbot:Element("Dropdown", "origin", {options = {"character", "camera"}})
 aimbot:Element("Toggle", "silent aim")
 aimbot:Element("Dropdown", "automatic fire", {options = {"off", "standard", "hitpart"}})
@@ -7590,18 +7589,18 @@ mt.__namecall = function(self, ...)
 		end  
 		if values.visuals.world["bullet tracers"].Toggle then
 			coroutine.wrap(function()
-				local beam = Instance.new("Part")
-				beam.Anchored = true
-				beam.CanCollide = false
-				beam.Material = Enum.Material.Neon
-				beam.Color = values.visuals.world["bullet tracers"].Color
-				beam.Size = Vector3.new(0.1, 0.1, (Camera.CFrame.Position - args[2]).Magnitude)
-				beam.CFrame = CFrame.new(Camera.CFrame.Position, args[2]) * CFrame.new(0, 0, -beam.Size.Z / 2)
-				beam.Parent = workspace.Debris
-				library:Tween(beam, TweenInfo.new(1.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Transparency = 1})
-				wait(1.5)
-				beam:Destroy()
-            end)()
+				                local beam = Instance.new("Part")
+                beam.Anchored = true
+                beam.CanCollide = false
+                beam.Material = Enum.Material.ForceField
+                beam.Color = values.visuals.world["bullet tracers"].Color
+                beam.Size = Vector3.new(0.1, 0.1, (Camera.CFrame.Position - args[2]).Magnitude)
+                beam.CFrame = CFrame.new(Camera.CFrame.Position, args[2]) * CFrame.new(0, 0, -beam.Size.Z / 2)
+                beam.Parent = workspace.Debris
+                library:Tween(beam, TweenInfo.new(1.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Transparency = 1})
+                wait(1.5)
+                beam:Destroy()
+            	end)()
 		end
 		if values.visuals.world["impacts"].Toggle then
 			coroutine.wrap(function()
