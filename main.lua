@@ -5117,9 +5117,17 @@ end)
 
 effects:Element("Slider", "Arms Transparency", {min = 0, max = 100, default = 0}, function(val)
 	for i,v in pairs(workspace.CurrentCamera:GetChildren()) do
-            if not table.find({"Right Arm", "Left Arm"}, v.Name) then
-			v.Transparency = values.visuals.effects["Arms Transparency"].Slider/100
-		end
+			if v:IsA("Model") and v:FindFirstChild("Right Arm") or v:FindFirstChild("Left Arm") then
+				local RightArm = v:FindFirstChild("Right Arm") or nil
+				local LeftArm = v:FindFirstChild("Left Arm") or nil		
+		
+				if RightArm ~= nil then
+					RightArm.Transparency = values.visuals.effects["Arms Transparency"].Slider/100
+				end
+				if LeftArm ~= nil then
+					LeftArm.Transparency =  values.visuals.effects["Arms Transparency"].Slider/100
+				end
+			end
 	end
 end)
 
