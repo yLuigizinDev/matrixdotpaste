@@ -6484,17 +6484,13 @@ chat:Element("TextBox", "message", {placeholder = "message"})
 chat:Element("Toggle", "no filter")
 
 
-	local NFUI = Instance.new("ScreenGui")
+	local Notification = Instance.new("ScreenGui")
 	local NotificationFrame = Instance.new("Frame")
 	local UIListLayout = Instance.new("UIListLayout")
 	local SampleFrame = Instance.new("Frame")
 	local Grad = Instance.new("Frame")
 	local SampleLabel = Instance.new("TextLabel")
 	local UIGradient = Instance.new("UIGradient")
-
-	NFUI.Parent = game.CoreGui
-	HFUI.ResetOnSpawn = false
-	HFUI.Enabled = true
 	
 	Notification.Name = "Notification"
 	Notification.Parent = game.CoreGui
