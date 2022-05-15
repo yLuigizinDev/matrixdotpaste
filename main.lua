@@ -6493,6 +6493,7 @@ local SampleLabel = Instance.new("TextLabel")
 MX_ONHIT.Name = "MX_ONHIT"
 MX_ONHIT.Parent = game.CoreGui
 MX_ONHIT.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+MX_ONHIT.DisplayOrder = 999999
 
 OnHitFrame.Parent = MX_ONHIT
 OnHitFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
