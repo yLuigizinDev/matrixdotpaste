@@ -6484,48 +6484,58 @@ chat:Element("TextBox", "message", {placeholder = "message"})
 chat:Element("Toggle", "no filter")
 
 
-local MX_ONHIT = Instance.new("ScreenGui")
-local OnHitFrame = Instance.new("Frame")
+local HitA__ = Instance.new("ScreenGui")
+local PF = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local D = Instance.new("Frame")
 local UIListLayout = Instance.new("UIListLayout")
-local SampleLabel = Instance.new("TextLabel")
 
+HitA__.Name = "HitA__"
+HitA__.Parent = game.CoreGui
+HitA__.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+HitA__.DisplayOrder = 999999999
+HitA__.ResetOnSpawn = false
 
-MX_ONHIT.Name = "MX_ONHIT"
-MX_ONHIT.Parent = game.CoreGui
-MX_ONHIT.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-MX_ONHIT.DisplayOrder = 999999
+PF.Name = "PF"
+PF.Parent = HitA__
+PF.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+PF.BorderSizePixel = 0
+PF.Position = UDim2.new(0, 0, 0.0260223057, 0)
+PF.Size = UDim2.new(0, 534, 0, 38)
+PF.Visible = false
 
-OnHitFrame.Parent = MX_ONHIT
-OnHitFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-OnHitFrame.BackgroundTransparency = 1.000
-OnHitFrame.Position = UDim2.new(1, -300, 0, 0)
-OnHitFrame.Size = UDim2.new(0, 300, 0, 500)
+TextLabel.Parent = PF
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(0, 0, 0.210526317, 0)
+TextLabel.Size = UDim2.new(0, 534, 0, 22)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "text lol"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 14.000
+TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+TextLabel.TextTransparency = 1
 
-UIListLayout.Parent = OnHitFrame
+D.Name = "D"
+D.Parent = PF
+D.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+D.BorderSizePixel = 0
+D.Size = UDim2.new(0, 534, 0, 2)
+
+UIListLayout.Parent = HitA__
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-
-SampleLabel.Name = "SampleLabel"
-SampleLabel.Parent = OnHitFrame
-SampleLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SampleLabel.BackgroundTransparency = 1.000
-SampleLabel.BorderSizePixel = 0
-SampleLabel.Size = UDim2.new(1, 0, 0, 18)
-SampleLabel.Font = Enum.Font.SourceSansLight
-SampleLabel.Text = "Hit SamplePlayer in HeadHB "
-SampleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-SampleLabel.TextSize = 16.000
-SampleLabel.TextStrokeTransparency = 0.000
-SampleLabel.TextTransparency = 1.000
-SampleLabel.TextXAlignment = Enum.TextXAlignment.Right
 
 local function CreateHitElement(text,col)
 	spawn(function()
-		local Label = SampleLabel:Clone()
-		Label.Text = text
-		Label.Parent = MX_ONHIT.Frame
-		Label.TextTransparency = 0
-		Label.TextColor3 = col
-		wait(5)
+		local pf2 = PF:Clone()
+		pf2.Visible = true
+		pf2.TextLabel.TextTransparency = 0
+		pf2.TextLabel.Text = text
+		pf2.TextLabel.TextColor3 = col
+
+		task.wait(2)
+		
 		Label:Destroy()
 	end)
 end
