@@ -5115,54 +5115,6 @@ effects:Element("ToggleTrans", "arm chams", {default = {Color = Color3.fromRGB(2
 	end
 end)
 
-effects:Element("Slider", "Arms Transparency", {min = 0, max = 100, default = 0}, function(val)
-	for i,v in pairs(workspace.CurrentCamera:GetChildren()) do
-			if v:IsA("Model") and v:FindFirstChild("Right Arm") or v:FindFirstChild("Left Arm") then
-				local RightArm = v:FindFirstChild("Right Arm") or nil
-				local LeftArm = v:FindFirstChild("Left Arm") or nil	
-
-				local RightGlove = (RightArm and (RightArm:FindFirstChild("Glove") or RightArm:FindFirstChild("RGlove"))) or nil
-				local LeftGlove = (LeftArm and (LeftArm:FindFirstChild("Glove") or LeftArm:FindFirstChild("LGlove"))) or nil
-					
-				local RightSleeve = RightArm and RightArm:FindFirstChild("Sleeve") or nil
-				local LeftSleeve = LeftArm and LeftArm:FindFirstChild("Sleeve") or nil	
-		
-				if RightArm ~= nil then
-					if RightArm.Transparency ~= values.visuals.effects["Arms Transparency"].Slider/100 then
-						RightArm.Transparency = values.visuals.effects["Arms Transparency"].Slider/100
-					end
-				end
-				if LeftArm ~= nil then
-					if LeftArm.Transparency ~=  values.visuals.effects["Arms Transparency"].Slider/100 then
-						LeftArm.Transparency =  values.visuals.effects["Arms Transparency"].Slider/100
-					end
-				end
-
-				if RightGlove ~= nil then
-					if RightGlove.Transparency ~= values.visuals.effects["Arms Transparency"].Slider/100 then
-						RightGlove.Transparency = values.visuals.effects["Arms Transparency"].Slider/100
-					end
-				end
-				if LeftGlove ~= nil then
-					if LeftGlove.Transparency ~= values.visuals.effects["Arms Transparency"].Slider/100 then
-						LeftGlove.Transparency = values.visuals.effects["Arms Transparency"].Slider/100
-					end
-				end
-
-				if RightSleeve ~= nil then
-					if RightSleeve.Transparency ~= values.visuals.effects["Arms Transparency"].Slider/100 then
-						RightSleeve.Transparency = values.visuals.effects["Arms Transparency"].Slider/100
-					end
-				end
-				if LeftSleeve ~= nil then
-					if LeftSleeve.Transparency ~= values.visuals.effects["Arms Transparency"].Slider/100 then
-						LeftSleeve.Transparency = values.visuals.effects["Arms Transparency"].Slider/100
-					end
-				end
-			end
-	end
-end)
-
 effects:Element("Jumbobox", "removals", {options = {"scope", "scope lines", "flash", "smoke", "decals", "shadows", "clothes"}}, function(val)
 	local tbl = val.Jumbobox
 	if table.find(tbl, "decals") then
