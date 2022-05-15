@@ -6197,6 +6197,7 @@ client:Element("Toggle", "buy any grenade")
 client:Element("Toggle", "chat alive")
 client:Element("Jumbobox", "shop", {options = {"inf time", "anywhere"}})
 client:Element("Toggle", "anti spectate")
+client:Element("Toggle", "upside down spectate") 
  
 local oldgrenadeallowed = Client.grenadeallowed
 Client.grenadeallowed = function(...)
@@ -7424,6 +7425,9 @@ mt.__namecall = function(self, ...)
 		if self.Name == "ReplicateCamera" and values.misc.client["anti spectate"].Toggle then
 			args[1] = CFrame.new()
 		end
+		if self.Name == "ReplicateCamera" and values.misc.client["upside down spectate"].Toggle then      
+			args[1] =  args[1] * CFrame.Angles(0,0,math.rad(180))      
+		end  
 	end
 	if method == "FindPartOnRayWithWhitelist" and not checkcaller() and Client.gun ~= "none" and Client.gun.Name ~= "C4" then
 		if #args[2] == 1 and args[2][1].Name == "SpawnPoints" then
