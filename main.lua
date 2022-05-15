@@ -169,14 +169,14 @@ function library:New(name)
 	but.BackgroundTransparency = 1
 	but.Parent = matrixGui
  
-	local cursor = Instance.new("ImageLabel")
-	cursor.Name = "cursor"
-	cursor.Parent = Aristois
-	cursor.BackgroundTransparency = 1
-	cursor.Size = UDim2.new(0,17,0,17)
-	cursor.Image = "rbxassetid://518398610"
-	cursor.ZIndex = 1000
-	cursor.ImageColor3 = Color3.fromRGB(255,255,255)
+	local cursor = INST("ImageLabel") 
+	cursor.Name = "cursor" 
+	cursor.Parent = matrixGui
+	cursor.BackgroundTransparency = 1 
+	cursor.Size = UDIM2(0,64,0,64) 
+	cursor.Image = "rbxassetid://7543116323" 
+	cursor.ZIndex = 1000 
+	cursor.ImageColor3 = COL3RGB(255,255,255) 
 	
 	local Players = game:GetService("Players")
     local LocalPlayer = Players.LocalPlayer
