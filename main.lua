@@ -73,6 +73,10 @@ local COL3RGB = Color3.fromRGB
 local COL3HSV = Color3.fromHSV 
 local CLAMP = math.clamp 
 local DEG = math.deg 
+function yrotate(cframe) 
+	local x, y, z = cframe:ToOrientation() 
+	return CFrame.new(cframe.Position) * CFrame.Angles(0,y,0) 
+end
 local FLOOR = math.floor 
 local ACOS = math.acos 
 local RANDOM = math.random 
@@ -4888,7 +4892,10 @@ aimbot:Element("Toggle", "prediction boost")
 aimbot:Element("Toggle", "teammates")
 aimbot:Element("Toggle", "auto baim")
 aimbot:Element("Toggle", "knifebot")
+aimbot:Element("Dropdown", "knifebot type", {options = {"standart", "aura", "Hittin P"}})
 aimbot:Element("Slider", "knifebot radius", {min = 0, max = 400, default = 100}) 
+aimbot:Element("Slider", "HPS", {min = 1, max = 200, default = 1})
+aimbot:Element("Toggle", "knifebot ignore map", {default = {Toggle = false}})
  
 local weapons = rage:MSector("weapons", "Left")
 local default = weapons:Tab("default")
@@ -5019,6 +5026,7 @@ end)()
  
 local exploits = rage:Sector("exploits", "Left")
 exploits:Element("ToggleKeybind", "double tap")
+exploits:Element("Slider", "hits amount", {min = 1, max = 60, default = 1})  
 exploits:Element("ToggleKeybind", "kill all")
 exploits:Element("Slider", "qp vertical pos", {min = -500, max = 500, default = 200})  
 exploits:Element("ToggleKeybind", "quick peek",{},function(tbl)
@@ -6864,23 +6872,36 @@ RunService.RenderStepped:Connect(function(step)
 			Client.DISABLED = false
 		end
 		if values.rage.exploits["kill all"].Toggle and values.rage.exploits["kill all"].Active and LocalPlayer.Character:FindFirstChild("UpperTorso") and LocalPlayer.Character:FindFirstChild("Gun") then
-			for _,Player in pairs(Players:GetPlayers()) do
-				if Player.Character and Player.Team ~= LocalPlayer.Team and Player.Character:FindFirstChild("UpperTorso") then
-					local oh1 = Player.Character.Head
-					local oh2 = Player.Character.Head.CFrame.p
-					local oh3 = Client.gun.Name
-					local oh4 = 4096
-					local oh5 = LocalPlayer.Character.Gun
-					local oh8 = 15
-					local oh9 = false
-					local oh10 = false
-					local oh11 = Vector3.new(0,0,0)
-					local oh12 = 16868
-					local oh13 = Vector3.new(0, 0, 0)
-					game:GetService("ReplicatedStorage").Events.HitPart:FireServer(oh1, oh2, oh3, oh4, oh5, oh6, oh7, oh8, oh9, oh10, oh11, oh12, oh13)
+			for b2, b3 in pairs(game:GetService("Players"):GetChildren()) do
+				if b3.Team ~= b3.Parent.LocalPlayer.Team then
+					if b3.Character and b3.Character:FindFirstChild("UpperTorso") and b3.Parent.LocalPlayer.Character and b3.Parent.LocalPlayer.Character:FindFirstChild("EquippedTool") then
+						if b3.Character:FindFirstChild("Humanoid") and b3.Character.Humanoid.Health > 0 then
+							killallisworking = true
+							local b4 = {
+								[1] = b3.Character.UpperTorso,
+								[2] = b3.Character.UpperTorso.Position,
+								[3] = "T Knife",
+								[4] = 4096,
+											[5] = LocalPlayer.Character.Gun,
+											[8] = 1,
+											[9] = false,
+											[10] = true,
+											[11] = Vector3.new(),
+											[12] = 16868,
+											[13] = Vector3.new()
+							}
+							if values.rage.exploits["hits amount"].Slider > 1 then
+								for i=1, values.rage.exploits["hits amount"].Slider do
+									game.ReplicatedStorage.Events.HitPart:FireServer(unpack(b4))
+								end
+							else
+								game.ReplicatedStorage.Events.HitPart:FireServer(unpack(b4))
+							end
+						else killallisworking = false end
+					end
 				end
 			end
-		end
+		else killallisworking = false end
 		if table.find(values.visuals.effects.removals.Jumbobox, "scope lines") then 
 			NewScope.Enabled = LocalPlayer.Character:FindFirstChild("AIMING") and true or false
 			Crosshairs.Scope.Visible = false
@@ -6921,6 +6942,9 @@ RunService.RenderStepped:Connect(function(step)
 						if Player.Team ~= LocalPlayer.Team or values.rage.aimbot.teammates.Toggle and Player:FindFirstChild("Status") and Player.Status.Team.Value ~= LocalPlayer.Status.Team.Value and Player.Status.Alive.Value then
 							if Client.gun:FindFirstChild("Melee") and values.rage.aimbot["knifebot"].Toggle then
 								local Ignore = {unpack(Collision)}
+								if values.rage.aimbot["knifebot ignore map"].Toggle then
+									table.insert(Ignore, game.Workspace.Map)
+								end
 								table.insert(Ignore, workspace.Map.Clips)
 								table.insert(Ignore, workspace.Map.SpawnPoints)
 								table.insert(Ignore, LocalPlayer.Character)
@@ -6936,30 +6960,74 @@ RunService.RenderStepped:Connect(function(step)
                                 			local Hit, Pos = workspace:FindPartOnRayWithIgnoreList(Ray, Ignore, false, true)
  
 								if Hit and Hit.Parent == Player.Character then
-									RageGuy = Hit
-									RageTarget = Hit
-									if not values.rage.aimbot["silent aim"].Toggle then
-										Camera.CFrame = CFrame.new(CamCFrame.Position, Hit.Position)
+									if values.rage.aimbot["knifebot type"].Dropdown == "standart" then
+										local Arguments = {
+											[1] = Hit,
+											[2] = Hit.Position,
+											[3] = Client.gun.Name,
+											[4] = 4096,
+											[5] = LocalPlayer.Character.Gun,
+											[8] = 1,
+											[9] = false,
+											[10] = false,
+											[11] = Vector3.new(),
+											[12] = 16868,
+											[13] = Vector3.new()
+										}
+										if values.rage.aimbot["HPS"].Slider > 1 then
+											for i=1, values.rage.aimbot["HPS"].Slider do
+												game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+											end
+										else
+											game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+										end
 									end
-									Filter = true
-									Client.firebullet()
-									Filter = false
- 
-									local Arguments = {
-										[1] = Hit,
-										[2] = Hit.Position,
-										[3] = Client.gun.Name,
-										[4] = 4096,
-										[5] = LocalPlayer.Character.Gun,
-										[8] = 1,
-										[9] = false,
-										[10] = false,
-										[11] = Vector3.new(),
-										[12] = 16868,
-										[13] = Vector3.new()
-									}
-									game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
-								end
+										if values.rage.aimbot["knifebot type"].Dropdown == "aura" then
+											local Arguments = {
+												[1] = Hit,
+												[2] = Hit.Position,
+												[3] = "Banana",
+												[4] = 4096,
+												[5] = LocalPlayer.Character.Gun,
+												[8] = 1,
+												[9] = false,
+												[10] = false,
+												[11] = Vector3.new(),
+												[12] = 16868,
+												[13] = Vector3.new()
+											}
+											if values.rage.aimbot["HPS"].Slider > 1 then
+												for i=1, values.rage.aimbot["HPS"].Slider do
+													game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+												end
+											else
+												game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+											end
+										end
+										if values.rage.aimbot["knifebot type"].Dropdown == "Hittin P" then
+											local Arguments = { 
+												[1] = Hit, 
+												[2] = Hit.Position, 
+												[3] = Client.gun.Name,
+												[4] = 4096, 
+												[5] = LocalPlayer.Character.Gun, 
+												[8] = math.random(10, 435), 
+												[9] = true, 
+												[10] = true, 
+												[11] = Vec3(), 
+												[12] = 1, 
+												[13] = Vec3() 
+											} 
+											if values.rage.aimbot["HPS"].Slider > 1 then
+												for i=1, values.rage.aimbot["HPS"].Slider do
+													game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+												end
+											else
+												game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+											end
+										end	
+										Filter = false  
+									end
 							else
 								local Ignore = {unpack(Collision)}
 								table.insert(Ignore, workspace.Map.Clips)
