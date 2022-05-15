@@ -5018,28 +5018,6 @@ players:Element("ToggleColor", "chams", nil, function(tbl)
 	end
 end)
 
-players:Element("ToggleTrans", "outline chams", nil, function(tbl)
-	for _,Player in pairs(Players:GetPlayers()) do
-		if Player.Character then
-			for _2,Obj in pairs(Player.Character:GetDescendants()) do
-				if Obj.Name == "WallCham" then
-				if tbl.Toggle then
-					if values.visuals.players.teammates.Toggle or Player.Team ~= LocalPlayer.Team then
-					Obj.Visible = true
-					else
-					Obj.Visible = false
-					end
-				else
-					Obj.Visible = false
-				end
-				Obj.Color3 = tbl.Color
-				Obj.Transparency = tbl.Transparency
-				end
-			end
-		end
-	end
-end)
-
 local effects = visuals:Sector("effects", "Right")
 effects:Element("ToggleTrans", "weapon chams", {default = {Color = Color3.fromRGB(255,255,255), Transparency = 0}}, function(tbl)
 	if WeaponObj == nil then return end
@@ -8331,10 +8309,10 @@ Players.PlayerAdded:Connect(function(Player)
  
 					table.insert(ChamItems, VisibleCham)
 					table.insert(ChamItems, WallCham)
- 
-					VisibleCham.Color3 = values.visuals.players.chams.Color
-					WallCham.Color3 = values.visuals.players.chams.Color
- 
+					
+					VisibleCham.Color3 = values.visuals.players.chams.Color 
+					WallCham.Color3 = values.visuals.players.chams.Color 
+
 					VisibleCham.AdornCullingMode = "Never"
 					WallCham.AdornCullingMode = "Never"
  
@@ -8412,14 +8390,14 @@ for _,Player in pairs(Players:GetPlayers()) do
 					VisibleCham.Size = obj.Size + Vector3.new(0.1,0.1,0.1)
 					VisibleCham.AlwaysOnTop = false
 					VisibleCham.Transparency = 0
- 
-					local WallCham = Instance.new("BoxHandleAdornment")
-					WallCham.Name = "WallCham"
-					WallCham.AlwaysOnTop = true
-					WallCham.ZIndex = 5
-					WallCham.Size = obj.Size + Vector3.new(0.1,0.1,0.1)
-					WallCham.AlwaysOnTop = true
-					WallCham.Transparency = 0.7
+
+					local WallCham = INST("BoxHandleAdornment") 
+					WallCham.Name = "WallCham" 
+					WallCham.AlwaysOnTop = true 
+					WallCham.ZIndex = 5 
+					WallCham.Size = obj.Size + Vec3(0.1,0.1,0.1) 
+					WallCham.AlwaysOnTop = true 
+					WallCham.Transparency = 0.7 
  
 					if values.visuals.players.chams.Toggle then
 						if values.visuals.players.teammates.Toggle or Player.Team ~= LocalPlayer.Team then
