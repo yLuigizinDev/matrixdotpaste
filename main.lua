@@ -7590,48 +7590,18 @@ mt.__namecall = function(self, ...)
 		end  
 		if values.visuals.world["bullet tracers"].Toggle then
 			coroutine.wrap(function()
-					local beam = Instance.new("Part")
-					Beam.FaceCamera = true
-					Beam.LightEmission = 6
-					Beam.LightInfluence = 1
-					Beam.Texture = "rbxassetid://446111271"
-					Beam.LightEmission = 1
-					Beam.LightInfluence = 1
-					Beam.TextureMode = Enum.TextureMode.Wrap
-					Beam.TextureLength = 3
-					Beam.TextureSpeed = 3
-					beam.Anchored = true
-					beam.CanCollide = false
-					beam.Material = Enum.Material.Neon
-					beam.Color = values.visuals.world["bullet tracers"].Color
-					beam.Size = Vector3.new(0.1, 0.1, (Camera.CFrame.Position - args[2]).Magnitude)
-					beam.CFrame = CFrame.new(Camera.CFrame.Position, args[2]) * CFrame.new(0, 0, -beam.Size.Z / 2)
-					beam.Parent = workspace.Debris
-					library:Tween(beam, TweenInfo.new(1.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Transparency = 1})
-					wait(1.5)
-					beam:Destroy()
-					end)()
-					end
-					if values.visuals.world["impacts"].Toggle then
-					coroutine.wrap(function()
-					local hit = INST("Part")
-					hit.Transparency = 1
-					hit.Anchored = true
-					hit.CanCollide = false
-					hit.Size = Vec3(0.3,0.3,0.3)
-					hit.Position = args[2]
-					local selection = INST("SelectionBox")
-					selection.LineThickness = 0
-					selection.SurfaceTransparency = 0.5
-					selection.Color3 = values.visuals.world["impacts"].Color
-					selection.SurfaceColor3 = values.visuals.world["impacts"].Color
-					selection.Parent = hit
-					selection.Adornee = hit
-					hit.Parent = workspace.Debris
-					wait(5.9)
-					library:Tween(selection, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {SurfaceTransparency = 1})
-					hit:Destroy()
-            	end)()
+				local beam = Instance.new("Part")
+				beam.Anchored = true
+				beam.CanCollide = false
+				beam.Material = Enum.Material.Neon
+				beam.Color = values.visuals.world["bullet tracers"].Color
+				beam.Size = Vector3.new(0.1, 0.1, (Camera.CFrame.Position - args[2]).Magnitude)
+				beam.CFrame = CFrame.new(Camera.CFrame.Position, args[2]) * CFrame.new(0, 0, -beam.Size.Z / 2)
+				beam.Parent = workspace.Debris
+				library:Tween(beam, TweenInfo.new(1.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Transparency = 1})
+				wait(1.5)
+				beam:Destroy()
+            end)()
 		end
 		if values.visuals.world["impacts"].Toggle then
 			coroutine.wrap(function()
