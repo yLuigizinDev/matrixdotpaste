@@ -5333,119 +5333,119 @@ world:Element("ToggleColor", "smoke radius", {default = {Color = Color3.fromRGB(
 	end
 end)
 world:Element("ToggleColor", "impacts", {default = {Color = Color3.fromRGB(255, 0, 0)}})
-world:Element("ToggleColor", "hit chams", {default = {Color = Color3.fromRGB(0, 0, 255)}})
-world:Element('ToggleColor', 'color_for_bullet_tracer', {default = {Color = Color3.fromRGB(0, 255, 0)}})
-		world:Element("Toggle", "bullet Tracer ",  nil, function(tbl)
-				if tbl.Toggle then
-					local nigger1 = true
-					   if nigger1 == true then
-						local Services = {
-							Players = game:GetService("Players"),
-							UserInputService = game:GetService("UserInputService"),
-							RunService = game:GetService("RunService"),
-							}
+world:Element('ToggleColor', 'color_for_bullet_tracer', {default = {Color = Color3.fromRGB(0, 255, 0)}})  
+world:Element("Toggle", "bullet Tracer ",  nil, function(tbl)
+	if tbl.Toggle then
+		local nigger1 = true
+		   if nigger1 == true then
+			local Services = {
+				Players = game:GetService("Players"),
+				UserInputService = game:GetService("UserInputService"),
+				RunService = game:GetService("RunService"),
+				}
 
-							local Local = {
-							Player = Services.Players.LocalPlayer,
-							Mouse = Services.Players.LocalPlayer:GetMouse(),
-							}
+				local Local = {
+				Player = Services.Players.LocalPlayer,
+				Mouse = Services.Players.LocalPlayer:GetMouse(),
+				}
 
-							--Local.Mouse.TargetFilter = workspace.BeamPart
+				--Local.Mouse.TargetFilter = workspace.BeamPart
 
-							local Other = {
-							Camera = workspace.CurrentCamera,
-							BeamPart = Instance.new("Part", workspace)
-							}
+				local Other = {
+				Camera = workspace.CurrentCamera,
+				BeamPart = Instance.new("Part", workspace)
+				}
 
-							Other.BeamPart.Name = "BeamPart"
-							Other.BeamPart.Transparency = 1
+				Other.BeamPart.Name = "BeamPart"
+				Other.BeamPart.Transparency = 1
 
-							local Settings = {
-							StartColor = Color3.new(1, 1, 1),
-							EndColor = Color3.new(1, 0, 0),
-							StartWidth = 1,
-							EndWidth = 0.20,
-							ShowImpactPoint = false,
-							ImpactTransparency = 0,
-							ImpactColor = Color3.new(1, 1, 1),
-							Time = 0.5,
-							}
-
-
-						local mt = getrawmetatable(game)
-						local old = mt.__namecall
-						local lp = game:GetService("Players").LocalPlayer
-						local rs = game:GetService("RunService").RenderStepped
-						local lasthittick = tick()
-
-							local funcs = {}
-							local Silent = false
-
-							function funcs:Beam(v1, v2)
-								local colorSequence = ColorSequence.new({
-									ColorSequenceKeypoint.new(0, Settings.StartColor),
-									ColorSequenceKeypoint.new(1, Settings.EndColor),
-									})
-							local Part = Instance.new("Part", Other.BeamPart)
-							Part.Size = Vector3.new(0, 0, 0)
-							Part.Transparency = 1
-							Part.CanCollide = false
-							Part.CFrame = CFrame.new(v1)
-							Part.Anchored = true
-							local Attachment = Instance.new("Attachment", Part)
-							local Part2 = Instance.new("Part", Other.BeamPart)
-							Part2.Size = Vector3.new(0, 0, 0)
-							Part2.Transparency = ShowImpactPoint and Settings.ImpactTransparency or 1
-							Part2.CanCollide = false
-							Part2.CFrame = CFrame.new(v2)
-							Part2.Anchored = true
-							Part2.Color = Settings.ImpactColor
-							local Attachment2 = Instance.new("Attachment", Part2)
-							local Beam = Instance.new("Beam", Part)
-							Beam.FaceCamera = true
-							Beam.Texture = "rbxassetid://446111271"
-							Beam.TextureLength = 1
-							Beam.TextureMode = Enum.TextureMode.Stretch
-							Beam.TextureSpeed = 2.4
-							Beam.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, values.visuals.world['color_for_bullet_tracer'].Color), ColorSequenceKeypoint.new(1, values.visuals.world['color_for_bullet_tracer'].Color)}
-							Beam.Attachment0 = Attachment
-							Beam.Attachment1 = Attachment2
-							Beam.LightEmission = 6
-							Beam.LightInfluence = 1
-							Beam.Width0 = Settings.StartWidth
-							Beam.Width1 = Settings.EndWidth
-							delay(Settings.Time, function()
-							for i = 0.5, 1, 0.02 do
-							wait()
-							Beam.Transparency = NumberSequence.new(i)
-							end
-							Part:Destroy()
-							Part2:Destroy()
-							end)
-							end
-
-							setreadonly(mt, false)
-						mt.__namecall = newcclosure(function(self, ...)
-							local args = {...}
-							if getnamecallmethod() == "FireServer" and self.Name == "HitPart" and tick() - lasthittick > 0.005 then
-								lasthittick = tick()
-								spawn(function()
-									local Beam = funcs:Beam(lp.Character.Gun.Flash.CFrame.p, args[2])
-									for i = 1, 1 * lifetime do
-										rs:Wait()
-										Beam.Transparency = i / (1 * lifetime)
-									end
-									Beam:Destroy()
-								end)
-							end
-							return old(self, ...)
-						end)
-						setreadonly(mt, true)
+				local Settings = {
+				StartColor = Color3.new(1, 1, 1),
+				EndColor = Color3.new(1, 0, 0),
+				StartWidth = 1,
+				EndWidth = 0.20,
+				ShowImpactPoint = false,
+				ImpactTransparency = 0,
+				ImpactColor = Color3.new(1, 1, 1),
+				Time = 0.5,
+				}
 
 
+			local mt = getrawmetatable(game)
+			local old = mt.__namecall
+			local lp = game:GetService("Players").LocalPlayer
+			local rs = game:GetService("RunService").RenderStepped
+			local lasthittick = tick()
+
+				local funcs = {}
+				local Silent = false
+
+				function funcs:Beam(v1, v2)
+					local colorSequence = ColorSequence.new({
+						ColorSequenceKeypoint.new(0, Settings.StartColor),
+						ColorSequenceKeypoint.new(1, Settings.EndColor),
+						})
+				local Part = Instance.new("Part", Other.BeamPart)
+				Part.Size = Vector3.new(0, 0, 0)
+				Part.Transparency = 1
+				Part.CanCollide = false
+				Part.CFrame = CFrame.new(v1)
+				Part.Anchored = true
+				local Attachment = Instance.new("Attachment", Part)
+				local Part2 = Instance.new("Part", Other.BeamPart)
+				Part2.Size = Vector3.new(0, 0, 0)
+				Part2.Transparency = ShowImpactPoint and Settings.ImpactTransparency or 1
+				Part2.CanCollide = false
+				Part2.CFrame = CFrame.new(v2)
+				Part2.Anchored = true
+				Part2.Color = Settings.ImpactColor
+				local Attachment2 = Instance.new("Attachment", Part2)
+				local Beam = Instance.new("Beam", Part)
+				Beam.FaceCamera = true
+				Beam.Texture = "rbxassetid://446111271"
+				Beam.TextureLength = 1
+				Beam.TextureMode = Enum.TextureMode.Stretch
+				Beam.TextureSpeed = 2.4
+				Beam.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, values.visuals.world['color_for_bullet_tracer'].Color), ColorSequenceKeypoint.new(1, values.visuals.world['color_for_bullet_tracer'].Color)}
+				Beam.Attachment0 = Attachment
+				Beam.Attachment1 = Attachment2
+				Beam.LightEmission = 6
+				Beam.LightInfluence = 1
+				Beam.Width0 = Settings.StartWidth
+				Beam.Width1 = Settings.EndWidth
+				delay(Settings.Time, function()
+				for i = 0.5, 1, 0.02 do
+				wait()
+				Beam.Transparency = NumberSequence.new(i)
 				end
-			end
-			end)      
+				Part:Destroy()
+				Part2:Destroy()
+				end)
+				end
+
+				setreadonly(mt, false)
+			mt.__namecall = newcclosure(function(self, ...)
+				local args = {...}
+				if getnamecallmethod() == "FireServer" and self.Name == "HitPart" and tick() - lasthittick > 0.005 then
+					lasthittick = tick()
+					spawn(function()
+						local Beam = funcs:Beam(lp.Character.Gun.Flash.CFrame.p, args[2])
+						for i = 1, 1 * lifetime do
+							rs:Wait()
+							Beam.Transparency = i / (1 * lifetime)
+						end
+						Beam:Destroy()
+					end)
+				end
+				return old(self, ...)
+			end)
+			setreadonly(mt, true)
+
+
+	end
+end
+end)    
+world:Element("ToggleColor", "hit chams", {default = {Color = Color3.fromRGB(0, 0, 255)}})
 world:Element("Toggle", "gun sounds", nil, function(tbl)
 	if tbl.Toggle then
 		OldGunSounds = game:GetService("RunService").RenderStepped:Connect(function()
