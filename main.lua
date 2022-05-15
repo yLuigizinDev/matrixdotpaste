@@ -141,6 +141,57 @@ function library:SaveConfig(cfg)
 	writefile(cfglocation..cfg..".txt", game:GetService("HttpService"):JSONEncode(copy))
 end
 
+local funcs = {}
+
+function funcs:Beam(v1, v2, c1)
+    local colorSequence = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Settings.StartColor),
+    ColorSequenceKeypoint.new(1, Settings.EndColor),
+    })
+    -- main part
+    local Part = Instance.new("Part", Other.BeamPart)
+    Part.Size = Vector3.new(1, 1, 1)
+    Part.Transparency = 1
+    Part.CanCollide = false
+    Part.CFrame = CFrame.new(v1)
+    Part.Anchored = true
+    -- attachment
+    local Attachment = Instance.new("Attachment", Part)
+    -- part 2
+    local Part2 = Instance.new("Part", Other.BeamPart)
+    Part2.Size = Vector3.new(1, 1, 1)
+    Part2.Transparency = ShowImpactPoint and Settings.ImpactTransparency or 1
+    Part2.CanCollide = false
+    Part2.CFrame = CFrame.new(v2)
+    Part2.Anchored = true
+    Part2.Color = c1
+    -- another attachment
+    local Attachment2 = Instance.new("Attachment", Part2)
+    -- beam
+    local Beam = Instance.new("Beam", Part)
+    Beam.FaceCamera = true
+    Beam.Color = colorSequence
+    Beam.Attachment0 = Attachment
+    Beam.Attachment1 = Attachment2
+    Beam.LightEmission = 6
+    Beam.LightInfluence = 1
+    Beam.Width0 = Settings.StartWidth
+    Beam.Width1 = Settings.EndWidth
+    Beam.Texture = "rbxassetid://446111271"
+    Beam.LightEmission = 1
+    Beam.LightInfluence = 1
+    Beam.TextureMode = Enum.TextureMode.Wrap -- wrap so length can be set by TextureLength
+    Beam.TextureLength = 3 -- repeating texture is 1 stud long 
+    Beam.TextureSpeed = 3
+    delay(Settings.Time, function()
+    for i = 0.5, 1, 0.02 do
+    wait()
+    Beam.Transparency = NumberSequence.new(i)
+    end
+    Part:Destroy()
+    Part2:Destroy()
+    end)
+end
 
 function library:New(name)
 	local menu = {}
@@ -7591,18 +7642,10 @@ mt.__namecall = function(self, ...)
 		end  
 		if values.visuals.world["bullet tracers"].Toggle then
 			coroutine.wrap(function()
-                local beam = Instance.new("Part")
-                beam.Anchored = true
-                beam.CanCollide = false
-                beam.Material = Enum.Material.ForceField
-                beam.Color = values.visuals.world["bullet tracers"].Color
-                beam.Size = Vector3.new(0.1, 0.1, (Camera.CFrame.Position - args[2]).Magnitude)
-                beam.CFrame = CFrame.new(Camera.CFrame.Position, args[2]) * CFrame.new(0, 0, -beam.Size.Z / 2)
-                beam.Parent = workspace.Debris
-                library:Tween(beam, TweenInfo.new(1.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Transparency = 1})
-                wait(1.5)
-                beam:Destroy()
-            end)()
+				local beam = funcs:Beam(game.workspace.Camera.Arms.Flash.CFrame.p, args[2])
+            	end)()
+		else
+			beam:Destroy()
 		end
 		if values.visuals.world["impacts"].Toggle then
 			coroutine.wrap(function()
