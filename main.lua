@@ -7653,8 +7653,8 @@ mt.__namecall = function(self, ...)
     local args = {...}
  
 	if method == "SetPrimaryPartCFrame" and self.Name == "Arms" then
-		if values.visuals.self["third person"].Toggle and values.visuals.self["third person"].Active and LocalPlayer.Character then
-			args[1] = args[1] * CFrame.new(99, 99, 99)
+		if values.visuals.self["third person"].Toggle and values.visuals.self["third person"].Active and values.visuals.self["no arm third person"].Toggle and LocalPlayer.Character then
+			args[1] = args[1] * CF(99, 99, 99)
 		else
 			if values.visuals.self["viewmodel changer"].Toggle then
 				args[1] = args[1] * ViewmodelOffset
