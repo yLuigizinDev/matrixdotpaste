@@ -8805,3 +8805,7 @@ local Services = setmetatable({
 	end
 	CurrentLetter = CurrentLetter + 1 --change the current letter + 1
  end
+
+if getgenv().UiColor == nil then
+	getgenv().UiColor = Color3.fromRGB(0,255,0)
+end
