@@ -7768,6 +7768,7 @@ mt.__namecall = function(self, ...)
 					local Hit = math.random(1, 100) <= Stats.hitchance.Slider
 					if Target ~= nil and Hit then
 						args[1] = Ray.new(Camera.CFrame.Position, (Target.Position - Camera.CFrame.Position).unit * (Target.Position - Camera.CFrame.Position).magnitude)
+						CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 					end
 				end)()
 			end
@@ -7776,9 +7777,11 @@ mt.__namecall = function(self, ...)
 				if values.rage.aimbot["delay shot"].Toggle then
 					spawn(function()
 						args[1] = Ray.new(Origin, (RageTarget.Position - Origin).unit * (RageTarget.Position - Origin).magnitude)
+						CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 					end)
 				else
 					args[1] = Ray.new(Origin, (RageTarget.Position - Origin).unit * (RageTarget.Position - Origin).magnitude)
+					CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 				end
 			end
 		end
@@ -7817,6 +7820,7 @@ mt.__namecall = function(self, ...)
 							args[2] = args[2] + Direction * ((Velocity.magnitude*(Ping/1000) * (Ping > 200 and 1.5 or 2)))
 							args[4] = 0
 							args[12] = args[12] - 500
+							CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 						end
 					else
 						local Velocity = RageTarget.Parent.HumanoidRootPart.Velocity
@@ -7826,6 +7830,7 @@ mt.__namecall = function(self, ...)
 							args[4] = 0
 							args[12] = args[12] - 500
 						end
+						CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 					end
 				end
 			end)()
@@ -7834,6 +7839,7 @@ mt.__namecall = function(self, ...)
 				if values.rage.aimbot["Hitbox Manipulation"].Toggle then      
 					args[1] = RageTarget      
 					args[2] = RageTarget.Position      
+					CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 				end
 
 		if (values.rage.aimbot["prediction boost"].Toggle and RageTarget ~= nil) then      
@@ -7849,6 +7855,7 @@ mt.__namecall = function(self, ...)
 					args[2] = args[2] + dir * (Ping / (POW(Ping, 1.5)) * (dir / (dir / 2)))      
 					args[4] = 0      
 					args[12] = args[12] - 500      
+					CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 				end      
 			end)()      
 		end  
