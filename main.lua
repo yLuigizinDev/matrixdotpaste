@@ -6298,7 +6298,7 @@ client:Element("Toggle", "Watermark", nil, function(tbl)
 		Time.ZIndex = 4
 		Time.Font = Enum.Font.Code
 		Time.Text = "00:00:00"
-		Time.TextColor3 = Cgetgenv().UiColor
+		Time.TextColor3 = getgenv().UiColor
 		Time.TextSize = 14.000
 		Time.TextStrokeTransparency = 0.000
 		Time.TextXAlignment = Enum.TextXAlignment.Left
