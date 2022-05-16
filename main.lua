@@ -5290,24 +5290,25 @@ end)
 local self = visuals:Sector("self", "Right")
 self:Element("ToggleKeybind", "third person", {}, function(tbl)
 	if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
-		if tbl.Toggle then
-			if tbl.Active then
-				LocalPlayer.CameraMaxZoomDistance = values.visuals.self.distance.Slider
-				LocalPlayer.CameraMinZoomDistance = values.visuals.self.distance.Slider
-				LocalPlayer.CameraMaxZoomDistance = values.visuals.self.distance.Slider
-				LocalPlayer.CameraMinZoomDistance = values.visuals.self.distance.Slider
-			else
-				LocalPlayer.CameraMaxZoomDistance = 0
-				LocalPlayer.CameraMinZoomDistance = 0
-				LocalPlayer.CameraMaxZoomDistance = 0
-				LocalPlayer.CameraMinZoomDistance = 0
-			end
-		else
-            LocalPlayer.CameraMaxZoomDistance = 0
-            LocalPlayer.CameraMinZoomDistance = 0
-		end
+	if tbl.Toggle then
+	  if tbl.Active then
+		LocalPlayer.CameraMaxZoomDistance = values.visuals.self.distance.Slider
+		LocalPlayer.CameraMinZoomDistance = values.visuals.self.distance.Slider
+		LocalPlayer.CameraMaxZoomDistance = values.visuals.self.distance.Slider
+		LocalPlayer.CameraMinZoomDistance = values.visuals.self.distance.Slider
+	  else
+		LocalPlayer.CameraMaxZoomDistance = 0
+		LocalPlayer.CameraMinZoomDistance = 0
+		LocalPlayer.CameraMaxZoomDistance = 0
+		LocalPlayer.CameraMinZoomDistance = 0
+	  end
+	else
+	  LocalPlayer.CameraMaxZoomDistance = 0
+	  LocalPlayer.CameraMinZoomDistance = 0
 	end
-end)
+	end
+	end)
+self:Element("Toggle", "no arm third person")
 self:Element("Slider", "distance", {min = 6, max = 18, default = 12}, function(tbl)
 	if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
 		if values.visuals.self["third person"].Toggle then
