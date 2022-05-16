@@ -4804,6 +4804,10 @@ other_luas:Element("Button", "dance", {}, function(tbl)
 
 	print("press coma to dance")
 end)
+
+other_luas:Element("Button", "break stormy (turn off pitch resolver)", {}, function(tbl)
+	game.Players.localPlayer.Character.UpperTorso.Waist:Destroy()
+end)
  
 local knife = skins:Sector("knife", "Left")
 knife:Element("Toggle", "knife changer")
