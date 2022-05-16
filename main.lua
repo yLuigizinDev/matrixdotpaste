@@ -48,7 +48,7 @@ underground = false
 
 -- getgenvs --
 getgenv().PasteName = "matrix"
-getgenv().UiColor = Color3.new(0,255,0)
+getgenv().UiColor = Color3.fromRGB(0,255,0)
 
 --------------
 local library = {}
