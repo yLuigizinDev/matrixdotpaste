@@ -48,6 +48,7 @@ underground = false
 
 -- getgenvs --
 getgenv().PasteName = "matrix"
+getgenv().UiColor = Color3.new(0,255,0)
 
 --------------
 local library = {}
@@ -225,7 +226,7 @@ function library:New(name)
 		TextLabel.ZIndex = 2
 		TextLabel.Font = Enum.Font.SourceSansSemibold
 		TextLabel.Text = "keybinds"
-		TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
+		TextLabel.TextColor3 = getgenv().UiColor
 		TextLabel.TextSize = 14.000
  
 		Frame.Parent = TextLabel
@@ -4633,6 +4634,7 @@ local misc = gui:Tab("misc")
 local skins = gui:Tab("skins")
 local luas = gui:Tab("luas")
 local different = gui:Tab("different") 
+local ui = gui:Tab("ui")
  
 getgenv().api = {}
 api.newtab = function(name)
@@ -4723,7 +4725,17 @@ local weird = different:Sector("weird", "Left")
 		parametres:Element("Slider", "1", {min = -10, max = 10, default = 0})
 		parametres:Element("Slider", "2", {min = -10, max = 10, default = 0})
 		parametres:Element("Slider", "3", {min = -10, max = 10, default = 0})
- 
+
+
+local Troll = different:Sector("Troll", "Left")
+Troll:Element("ToggleTrans", "Other UI Color", {default = {Color = Color3.fromRGB(255,255,255), Transparency = 0}}, function(tbl)
+	if tbl.Toggle then
+		getgenv().UiColor = Color
+	else
+		getgenv().UiColor = nil
+	end
+end)
+
  
 local luascripts = luas:Sector("lua scripts", "Left")
 luascripts:Element("Scroll", "lua", {options = allluas, Amount = 5})
@@ -5832,7 +5844,7 @@ client:Element("Toggle", "Spectators", nil, function(tbl)
         Text.ZIndex = 4
         Text.Font = Enum.Font.Code
         Text.Text = "Spectators"
-        Text.TextColor3 = Color3.fromRGB(0,255,0)
+        Text.TextColor3 = getgenv().UiColor
         Text.TextSize = 14.000
         Text.TextStrokeTransparency = 0.000
     
@@ -5852,7 +5864,7 @@ client:Element("Toggle", "Spectators", nil, function(tbl)
         Background.Name = "Background"
         Background.Parent = Spectators
         Background.BackgroundColor3 = Color3.fromRGB(0,0,0)
-        Background.BorderColor3 = Color3.fromRGB(0,255,0)
+        Background.BorderColor3 = getgenv().UiColor
         Background.Size = UDim2.new(1, 0, 1, 0)
     
         Color.Name = "Color"
@@ -6235,7 +6247,7 @@ client:Element("Toggle", "Watermark", nil, function(tbl)
 
 		Color.Name = "Color"
 		Color.Parent = ScreenLabel
-		Color.BackgroundColor3 = Color3.fromRGB(0,255,0)
+		Color.BackgroundColor3 = getgenv().UiColor
 		Color.BorderSizePixel = 0
 		Color.Position = UDim2.new(0.0192307699, 0, 0, 0)
 		Color.Size = UDim2.new(1.25, 0, 0, 2)
@@ -6260,7 +6272,7 @@ client:Element("Toggle", "Watermark", nil, function(tbl)
 		Text.ZIndex = 4
 		Text.Font = Enum.Font.Code
 		Text.Text = "matrix.paste | "
-		Text.TextColor3 = Color3.fromRGB(0,255,0)
+		Text.TextColor3 = getgenv().UiColor
 		Text.TextSize = 14.000
 		Text.TextStrokeTransparency = 0.000
 		Text.TextXAlignment = Enum.TextXAlignment.Left
@@ -6273,7 +6285,7 @@ client:Element("Toggle", "Watermark", nil, function(tbl)
 		Text2.ZIndex = 4
 		Text2.Font = Enum.Font.Code
 		Text2.Text = " | BULID: DEV"
-		Text2.TextColor3 = Color3.fromRGB(0,255,0)
+		Text2.TextColor3 = getgenv().UiColor
 		Text2.TextSize = 14.000
 		Text2.TextStrokeTransparency = 0.000
 		Text2.TextXAlignment = Enum.TextXAlignment.Left
@@ -6286,7 +6298,7 @@ client:Element("Toggle", "Watermark", nil, function(tbl)
 		Time.ZIndex = 4
 		Time.Font = Enum.Font.Code
 		Time.Text = "00:00:00"
-		Time.TextColor3 = Color3.fromRGB(65025, 65025, 65025)
+		Time.TextColor3 = Cgetgenv().UiColor
 		Time.TextSize = 14.000
 		Time.TextStrokeTransparency = 0.000
 		Time.TextXAlignment = Enum.TextXAlignment.Left
@@ -7768,7 +7780,6 @@ mt.__namecall = function(self, ...)
 					local Hit = math.random(1, 100) <= Stats.hitchance.Slider
 					if Target ~= nil and Hit then
 						args[1] = Ray.new(Camera.CFrame.Position, (Target.Position - Camera.CFrame.Position).unit * (Target.Position - Camera.CFrame.Position).magnitude)
-						CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 					end
 				end)()
 			end
@@ -7777,11 +7788,9 @@ mt.__namecall = function(self, ...)
 				if values.rage.aimbot["delay shot"].Toggle then
 					spawn(function()
 						args[1] = Ray.new(Origin, (RageTarget.Position - Origin).unit * (RageTarget.Position - Origin).magnitude)
-						CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 					end)
 				else
 					args[1] = Ray.new(Origin, (RageTarget.Position - Origin).unit * (RageTarget.Position - Origin).magnitude)
-					CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 				end
 			end
 		end
@@ -7810,6 +7819,9 @@ mt.__namecall = function(self, ...)
 			args[1] = RageTarget
             args[2] = RageTarget.Position
 		end
+		if values.different.weird["md"].Toggle then 
+			args[8] *= 99999999 * 99999999 * 999999 
+		end 
 		if values.rage.aimbot["prediction"].Dropdown ~= "off" and RageTarget ~= nil then
 			coroutine.wrap(function()
 				if Players:GetPlayerFromCharacter(args[1].Parent) or args[1] == RageTarget then
@@ -7820,7 +7832,6 @@ mt.__namecall = function(self, ...)
 							args[2] = args[2] + Direction * ((Velocity.magnitude*(Ping/1000) * (Ping > 200 and 1.5 or 2)))
 							args[4] = 0
 							args[12] = args[12] - 500
-							CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 						end
 					else
 						local Velocity = RageTarget.Parent.HumanoidRootPart.Velocity
@@ -7830,7 +7841,6 @@ mt.__namecall = function(self, ...)
 							args[4] = 0
 							args[12] = args[12] - 500
 						end
-						CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 					end
 				end
 			end)()
@@ -7839,7 +7849,6 @@ mt.__namecall = function(self, ...)
 				if values.rage.aimbot["Hitbox Manipulation"].Toggle then      
 					args[1] = RageTarget      
 					args[2] = RageTarget.Position      
-					CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 				end
 
 		if (values.rage.aimbot["prediction boost"].Toggle and RageTarget ~= nil) then      
@@ -7855,7 +7864,6 @@ mt.__namecall = function(self, ...)
 					args[2] = args[2] + dir * (Ping / (POW(Ping, 1.5)) * (dir / (dir / 2)))      
 					args[4] = 0      
 					args[12] = args[12] - 500      
-					CreateHitElement("Hit "..EndHit.Parent.Name.." in the "..EndHit.Name,Color3.new(1,1,1)) 
 				end      
 			end)()      
 		end  
