@@ -4727,12 +4727,12 @@ local weird = different:Sector("weird", "Left")
 		parametres:Element("Slider", "3", {min = -10, max = 10, default = 0})
 
 
-local Troll = different:Sector("Troll", "Left")
-Troll:Element("ToggleTrans", "Other UI Color", {default = {Color = Color3.fromRGB(255,255,255), Transparency = 0}}, function(tbl)
+local UI_THINGS = ui:Sector("Troll", "Left")
+UI_THINGS:Element("ToggleTrans", "Other UI Color", {default = {Color = Color3.fromRGB(255,255,255), Transparency = 0}}, function(tbl)
 	if tbl.Toggle then
 		getgenv().UiColor = Color
 	else
-		getgenv().UiColor = nil
+		getgenv().UiColor = Color3.new(0,255,0)
 	end
 end)
 
