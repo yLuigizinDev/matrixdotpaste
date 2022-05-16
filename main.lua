@@ -48,7 +48,6 @@ underground = false
 
 -- getgenvs --
 getgenv().PasteName = "matrix"
-getgenv().UiColor = Color3.fromRGB(0,255,0)
 
 --------------
 local library = {}
@@ -226,7 +225,7 @@ function library:New(name)
 		TextLabel.ZIndex = 2
 		TextLabel.Font = Enum.Font.SourceSansSemibold
 		TextLabel.Text = "keybinds"
-		TextLabel.TextColor3 = getgenv().UiColor
+		TextLabel.TextColor3 =  Color3.fromRGB(0,255,0)
 		TextLabel.TextSize = 14.000
  
 		Frame.Parent = TextLabel
@@ -4634,7 +4633,6 @@ local misc = gui:Tab("misc")
 local skins = gui:Tab("skins")
 local luas = gui:Tab("luas")
 local different = gui:Tab("different") 
-local ui = gui:Tab("ui")
  
 getgenv().api = {}
 api.newtab = function(name)
@@ -4725,16 +4723,6 @@ local weird = different:Sector("weird", "Left")
 		parametres:Element("Slider", "1", {min = -10, max = 10, default = 0})
 		parametres:Element("Slider", "2", {min = -10, max = 10, default = 0})
 		parametres:Element("Slider", "3", {min = -10, max = 10, default = 0})
-
-
-local UI_THINGS = ui:Sector("Troll", "Left")
-UI_THINGS:Element("ToggleTrans", "Other UI Color", {default = {Color = Color3.fromRGB(255,255,255), Transparency = 0}}, function(tbl)
-	if tbl.Toggle then
-		getgenv().UiColor = Color
-	else
-		getgenv().UiColor = Color3.new(0,255,0)
-	end
-end)
 
  
 local luascripts = luas:Sector("lua scripts", "Left")
@@ -5844,7 +5832,7 @@ client:Element("Toggle", "Spectators", nil, function(tbl)
         Text.ZIndex = 4
         Text.Font = Enum.Font.Code
         Text.Text = "Spectators"
-        Text.TextColor3 = getgenv().UiColor
+        Text.TextColor3 = Color3.fromRGB(0,255,0)
         Text.TextSize = 14.000
         Text.TextStrokeTransparency = 0.000
     
@@ -5864,7 +5852,7 @@ client:Element("Toggle", "Spectators", nil, function(tbl)
         Background.Name = "Background"
         Background.Parent = Spectators
         Background.BackgroundColor3 = Color3.fromRGB(0,0,0)
-        Background.BorderColor3 = getgenv().UiColor
+        Background.BorderColor3 =  Color3.fromRGB(0,255,0)
         Background.Size = UDim2.new(1, 0, 1, 0)
     
         Color.Name = "Color"
@@ -6247,7 +6235,7 @@ client:Element("Toggle", "Watermark", nil, function(tbl)
 
 		Color.Name = "Color"
 		Color.Parent = ScreenLabel
-		Color.BackgroundColor3 = getgenv().UiColor
+		Color.BackgroundColor3 = Color3.fromRGB(0,255,0)
 		Color.BorderSizePixel = 0
 		Color.Position = UDim2.new(0.0192307699, 0, 0, 0)
 		Color.Size = UDim2.new(1.25, 0, 0, 2)
@@ -6272,7 +6260,7 @@ client:Element("Toggle", "Watermark", nil, function(tbl)
 		Text.ZIndex = 4
 		Text.Font = Enum.Font.Code
 		Text.Text = "matrix.paste | "
-		Text.TextColor3 = getgenv().UiColor
+		Text.TextColor3 = Color3.fromRGB(0,255,0)
 		Text.TextSize = 14.000
 		Text.TextStrokeTransparency = 0.000
 		Text.TextXAlignment = Enum.TextXAlignment.Left
@@ -6285,7 +6273,7 @@ client:Element("Toggle", "Watermark", nil, function(tbl)
 		Text2.ZIndex = 4
 		Text2.Font = Enum.Font.Code
 		Text2.Text = " | BULID: DEV"
-		Text2.TextColor3 = getgenv().UiColor
+		Text2.TextColor3 = Color3.fromRGB(0,255,0)
 		Text2.TextSize = 14.000
 		Text2.TextStrokeTransparency = 0.000
 		Text2.TextXAlignment = Enum.TextXAlignment.Left
@@ -6298,7 +6286,7 @@ client:Element("Toggle", "Watermark", nil, function(tbl)
 		Time.ZIndex = 4
 		Time.Font = Enum.Font.Code
 		Time.Text = "00:00:00"
-		Time.TextColor3 = getgenv().UiColor
+		Time.TextColor3 = Color3.fromRGB(0,255,0)
 		Time.TextSize = 14.000
 		Time.TextStrokeTransparency = 0.000
 		Time.TextXAlignment = Enum.TextXAlignment.Left
@@ -8805,7 +8793,3 @@ local Services = setmetatable({
 	end
 	CurrentLetter = CurrentLetter + 1 --change the current letter + 1
  end
-
-if getgenv().UiColor == nil then
-	getgenv().UiColor = Color3.fromRGB(0,255,0)
-end
