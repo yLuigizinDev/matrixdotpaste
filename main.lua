@@ -4953,7 +4953,7 @@ antiaim:Element("Toggle", "fake duck",{},function(tbl)
 			CrouchAnim:Play()
 		end)
 	end
-end)    
+end)     
 antiaim:Element("Dropdown", "yaw base", {options = {"camera", "targets", "spin", "random"}})
 antiaim:Element("Slider", "yaw offset", {min = -180, max = 180, default = 0})
 antiaim:Element("Toggle", "jitter")
@@ -4991,42 +4991,44 @@ fakelag:Element("ToggleColor", "visualize lag", {default = {Toggle = false, Colo
 		FakelagFolder:ClearAllChildren()
 	end
 end)
+fakelag:Element("Dropdown", "visualize lag material", {options = {"Neon", "ForceField","SmoothPlastic"}})  
+fakelag:Element("Slider", "visualize lag transparency", {min = 0, max = 10, default = 0})    
 fakelag:Element("ToggleKeybind", "ping spike")
-coroutine.wrap(function()
-while wait(1/16) do
-	LagTick = math.clamp(LagTick + 1, 0, values.rage.fakelag.limit.Slider)
-	if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("UpperTorso") and values.rage.fakelag.enabled.Toggle then
-		if LagTick == (values.rage.fakelag.amount.Dropdown == "static" and values.rage.fakelag.limit.Slider or math.random(1, values.rage.fakelag.limit.Slider)) then
-			game:GetService("NetworkClient"):SetOutgoingKBPSLimit(9e9)
-			FakelagFolder:ClearAllChildren()
-			LagTick = 0
-			if values.rage.fakelag["visualize lag"].Toggle then
-				for _,hitbox in pairs(LocalPlayer.Character:GetChildren()) do
-					if hitbox:IsA("BasePart") and hitbox.Name ~= "HumanoidRootPart" then
-						local part = Instance.new("Part")
-						part.CFrame = hitbox.CFrame
-						part.Anchored = true
-						part.CanCollide = false
-						part.Material = Enum.Material.ForceField
-						part.Color = values.rage.fakelag["visualize lag"].Color
-						part.Name = hitbox.Name
-						part.Transparency = 0
-						part.Size = hitbox.Size
-						part.Parent = FakelagFolder
-					end
-				end
-			end
-		else
-			if values.rage.fakelag.enabled.Toggle then
-				game:GetService("NetworkClient"):SetOutgoingKBPSLimit(1)
-			end
-		end
-	else
-		FakelagFolder:ClearAllChildren()
-		game:GetService("NetworkClient"):SetOutgoingKBPSLimit(9e9)
-	end
-end
-end)()
+coroutine.wrap(function()      
+	while wait(1/16) do      
+		LagTick = CLAMP(LagTick + 1, 0, values.rage.fakelag.limit.Slider)      
+		if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("UpperTorso") and values.rage.fakelag.enabled.Toggle then    
+			if LagTick == (values.rage.fakelag.amount.Dropdown == "static" and values.rage.fakelag.limit.Slider or RANDOM(1, values.rage.fakelag.limit.Slider)) then      
+				game:GetService("NetworkClient"):SetOutgoingKBPSLimit(9e9)      
+				FakelagFolder:ClearAllChildren()      
+				LagTick = 0      
+				if values.rage.fakelag["visualize lag"].Toggle then      
+					for _,hitbox in pairs(LocalPlayer.Character:GetChildren()) do      
+						if hitbox:IsA("BasePart") and hitbox.Name ~= "HumanoidRootPart" then      
+							local part = INST("Part")      
+							part.CFrame = hitbox.CFrame      
+							part.Anchored = true      
+							part.CanCollide = false      
+							part.Material = values.rage.fakelag["visualize lag material"].Dropdown       
+							part.Color = values.rage.fakelag["visualize lag"].Color      
+							part.Name = hitbox.Name      
+							part.Transparency = values.rage.fakelag["visualize lag transparency"].Slider/10        
+							part.Size = hitbox.Size      
+							part.Parent = FakelagFolder      
+						end      
+					end      
+				end      
+			else      
+				if values.rage.fakelag.enabled.Toggle then      
+					game:GetService("NetworkClient"):SetOutgoingKBPSLimit(1)      
+				end      
+			end      
+		else      
+			FakelagFolder:ClearAllChildren()      
+			game:GetService("NetworkClient"):SetOutgoingKBPSLimit(9e9)      
+		end      
+	end      
+end)()       
  
 local exploits = rage:Sector("exploits", "Left")
 exploits:Element("ToggleKeybind", "double tap")
