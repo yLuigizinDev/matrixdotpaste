@@ -50,6 +50,20 @@ underground = false
 getgenv().PasteName = "matrix"
 
 --------------
+
+task.wait(0.01)
+
+getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).moveOldMessages()
+getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
+	"matrix.paste",
+	"sucessfully executed the script",
+	Color3.fromRGB(0,255,0), 
+	Color3.new(1,1,1),
+	.01
+)
+
+task.wait(0.001)
+
 local library = {}
 
 local Signal = loadstring(game:HttpGet("https://github.com/yLuigizinDev/matrix_tools/raw/main/signal.lua"))()
