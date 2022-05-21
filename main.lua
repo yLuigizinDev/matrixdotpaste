@@ -4899,12 +4899,15 @@ local aimbot = rage:Sector("aimbot", "Left")
 aimbot:Element("Toggle", "enabled")
 aimbot:Element("Dropdown", "origin", {options = {"character", "camera"}})
 aimbot:Element("Toggle", "silent aim")
-aimbot:Element("Dropdown", "automatic fire", {options = {"off", "standard", "hitpart"}})
+aimbot:Element("Dropdown", "automatic fire", {options = {"off", "standard", "hitpart", 'silent', 'dogshit'}})
 aimbot:Element("Toggle", "automatic penetration")
 aimbot:Element("Jumbobox", "resolver", {options = {"pitch", "front track", "roll", "animation", "head"}})   
 aimbot:Element("Toggle", "Hitbox Manipulation") 
 aimbot:Element("Toggle", "delay shot")
 aimbot:Element("Toggle", "force hit")
+aimbot:Element("Dropdown", "force mode", {options = {'hit', 'headshot'}})
+aimbot:Element("Toggle", "hitscan")
+aimbot:Element('Dropdown', 'hitscan method', {options = {'new', 'old'}})
 aimbot:Element("Dropdown", "prediction", {options = {"off", "cframe", "velocity"}})
 aimbot:Element("Toggle", "prediction boost")
 aimbot:Element("Toggle", "teammates")
@@ -5045,7 +5048,7 @@ coroutine.wrap(function()
 end)()       
  
 local exploits = rage:Sector("exploits", "Left")
-exploits:Element("ToggleKeybind", "double tap")
+exploits:Element('ToggleKeybind', 'custom tap')
 exploits:Element("Slider", "hits amount", {min = 1, max = 60, default = 1})  
 exploits:Element("ToggleKeybind", "kill all")
 exploits:Element("Slider", "qp vertical pos", {min = -500, max = 500, default = 200})  
@@ -6432,11 +6435,13 @@ end
 local movement = misc:Sector("movement", "Left")
 movement:Element("Toggle", "bunny hop")
 movement:Element("Dropdown", "direction", {options = {"forward", "directional", "directional 2"}})
-movement:Element("Dropdown", "type", {options = {"gyro", "cframe"}})
+movement:Element("Dropdown", "type", {options = {"gyro", "cframe", "velocity" , "crim hop"}})
 movement:Element("Slider", "speed", {min = 15, max = 300, default = 40})
+movement:Element("Toggle", "bunny hop increase") 
 movement:Element("ToggleKeybind", "jump bug")
 movement:Element("ToggleKeybind", "edge jump")
 movement:Element("ToggleKeybind", "edge bug")
+movement:Element('ToggleKeybind', 'no launch')
 local noclip = misc:Sector("noclip", "Left")
 		noclip:Element("ToggleKeybind", "noclip", {}, function(tbl)
 			if tbl.Toggle and tbl.Active and LocalPlayer.Character then
@@ -7169,8 +7174,112 @@ RunService.RenderStepped:Connect(function(step)
 													Filter = false
 													break
 												end
+											elseif values.rage.aimbot['automatic fire'].Dropdown == 'dogshit' then
+
+												Client.firebullet()
+												local Arguments = {
+													[1] = EndHit,
+													[2] = EndHit.Position,
+													[3] = LocalPlayer.Character.EquippedTool.Value,
+													[4] = 250,
+													[5] = LocalPlayer.Character.Gun,
+													[8] = 2,
+													[9] = false,
+													[10] = false,
+													[11] = Vec3(),
+													[12] = 250,
+													[13] = Vec3()
+												}
+												game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+												if values.rage.exploits['custom tap'].Toggle and values.rage.exploits['custom tap'].Active then
+													for chingchong = 2, values.rage.exploits["hits amount"].Slider do
+														Client.firebullet()
+														local Arguments = {
+															[1] = EndHit,
+															[2] = EndHit.Position,
+															[3] = LocalPlayer.Character.EquippedTool.Value,
+															[4] = 100,
+															[5] = LocalPlayer.Character.Gun,
+															[8] = 1,
+															[9] = false,
+															[10] = wallbang,
+															[11] = Vec3(),
+															[12] = 100,
+															[13] = Vec3()
+														}
+														game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+													end
+												end
+											elseif values.rage.aimbot['automatic fire'].Dropdown == 'silent' then
+												local Arguments = {
+													[1] = EndHit,
+													[2] = EndHit.Position,
+													[3] = LocalPlayer.Character.EquippedTool.Value,
+													[4] = 100,
+													[5] = LocalPlayer.Character.Gun,
+													[8] = 1,
+													[9] = false,
+													[10] = wallbang,
+													[11] = Vec3(),
+													[12] = 100,
+													[13] = Vec3()
+												}
+												game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+												if values.rage.exploits['custom tap'].Toggle and values.rage.exploits['custom tap'].Active then
+													for chingchong = 2, values.rage.exploits["hits amount"].Slider do
+														local Arguments = {
+															[1] = EndHit,
+															[2] = EndHit.Position,
+															[3] = LocalPlayer.Character.EquippedTool.Value,
+															[4] = 100,
+															[5] = LocalPlayer.Character.Gun,
+															[8] = 1,
+															[9] = false,
+															[10] = wallbang,
+															[11] = Vec3(),
+															[12] = 100,
+															[13] = Vec3()
+														}
+														game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+													end
+												end	
+											end
+											Filter = false
+											break
+										end
+									end
+								end
 											else
 												local penetration = Client.gun.Penetration.Value * 0.01
+
+												if values.rage.aimbot['hitscan method'].Dropdown == 'new' and values.rage.aimbot['hitscan'].Toggle then
+													if values.rage.aimbot['enabled'].Toggle and RageTarget ~= nil then	
+														penetration = Client.gun.Penetration.Value * 0.02
+														Client.firebullet()
+														print("workslol291")
+														wait(0.0001)
+														print("fired shot")
+													end
+												elseif values.rage.aimbot['hitscan method'].Dropdown == 'old' and values.rage.aimbot['hitscan'].Toggle then
+													if values.rage.aimbot['enabled'].Toggle and RageTarget ~= nil then
+														--old method is really shit, it sometimes does not work.
+														penetration = Client.gun.Penetration.Value * 0.04
+														Client.firebullet()
+														print("lol")
+														wait(0.01)
+														Client.firebullet()
+														wait(0.0001)
+														local bY = game.Players.LocalPlayer                                                                                               
+														local c1 = bY.Character.HumanoidRootPart.CFrame
+														bY.Character.HumanoidRootPart.CFrame = CFrame.new()
+														local c2 = bY.Character.LowerTorso.Root:Clone()
+														bY.Character.LowerTorso.Root:Destroy()
+														c2.Parent = bY.Character.LowerTorso
+														wait()
+														bY.Character.HumanoidRootPart.CFrame = c1
+													end
+												end
+												
 												local limit = 0
 												local dmgmodifier = 1
 												for i = 1, #Hits do
@@ -7447,12 +7556,24 @@ RunService.RenderStepped:Connect(function(step)
 				BodyVelocity.Parent = LocalPlayer.Character.UpperTorso
 				LocalPlayer.Character.Humanoid.Jump = true
 				BodyVelocity.Velocity = Vector3.new(rot.LookVector.X,0,rot.LookVector.Z) * (values.misc.movement["speed"].Slider * 2)
-				if add == 0 and values.misc.movement.direction.Dropdown == "directional" and not UserInputService:IsKeyDown("W") then
-					BodyVelocity:Destroy()
-				else
+				if add == 0 and values.misc.movement.direction.Dropdown == "directional" and not UserInputService:IsKeyDown("W") then 
+					BodyVelocity:Destroy() 
+				else 
 					if values.misc.movement.type.Dropdown == "cframe" then
 						BodyVelocity:Destroy()
-						Root.CFrame = Root.CFrame + Vector3.new(rot.LookVector.X,0,rot.LookVector.Z) * values.misc.movement["speed"].Slider/50
+						Root.CFrame = Root.CFrame + Vec3(rot.LookVector.X,0,rot.LookVector.Z) * values.misc.movement["speed"].Slider/50
+					elseif values.misc.movement.type.Dropdown == "velocity" then
+						BodyVelocity:Destroy()
+						Root.Velocity = Vec3(rot.LookVector.X * (values.misc.movement["speed"].Slider * 2), Root.Velocity.y, rot.LookVector.Z * (values.misc.movement["speed"].Slider * 2))
+					elseif values.misc.movement.type.Dropdown == "crim hop" then
+						BodyVelocity:Destroy()
+						if not switchtrigger then 
+							switchtrigger = true
+							Root.CFrame = Root.CFrame - Vec3(rot.LookVector.X, 0.05, rot.LookVector.Z) * values.misc.movement["speed"].Slider/10
+							wait(0)
+							switchtrigger = true
+						end
+						Root.CFrame = Root.CFrame + Vec3(rot.LookVector.X, 0, rot.LookVector.Z) * values.misc.movement["speed"].Slider/20
 					end
 				end
 			else
@@ -7462,6 +7583,19 @@ RunService.RenderStepped:Connect(function(step)
 			game.CoreGui.BH.BHF.Visible = false
 			game.CoreGui.BH.BHF.TEXT.TextColor3 = Color3.fromRGB(255, 0, 4)
 		end
+		if values.misc.movement["bunny hop increase"].Toggle and values.misc.movement["bunny hop increase"].Active then 
+			local player = game.Players.LocalPlayer
+			local char = player.Character or player.CharacterAdded:Wait()
+			local h = char:WaitForChild("Humanoid")
+			--Increase speed by X when clicked.
+			
+			script.Parent.MouseButton1Click:Connect(function()
+				print("Event fired")
+				h.WalkSpeed = 99
+				print("exploits fired!")
+			end)
+		end
+	  
 		if values.misc.movement["edge jump"].Toggle and values.misc.movement["edge jump"].Active then
 			if LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Freefall and LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Jumping then
 				coroutine.wrap(function()
@@ -7472,6 +7606,11 @@ RunService.RenderStepped:Connect(function(step)
 				end)()
 			end
 		end
+		if values.misc.movement['no launch'].Toggle and values.misc.movement['no launch'].Active then 
+            if Root.Velocity.Y > values.misc.movement['launch block (y velocity)'].Slider then 
+                Root.Velocity = Vector3.new(Root.Velocity.x, 0, Root.Velocity.z)
+            end
+        end
 		Jitter = not Jitter
 		LocalPlayer.Character.Humanoid.AutoRotate = false
 		if values.rage.angles.enabled.Toggle and not DisableAA then
@@ -7819,6 +7958,14 @@ mt.__namecall = function(self, ...)
         end
 	end
 	if method == "FireServer" and self.Name == "HitPart" then
+		if values.rage.aimbot['force mode'].Dropdown == 'hit' and values.rage.aimbot['force hit'].Toggle and RageTarget ~= nil then
+			args[1] = RageTarget
+			args[2] = RageTarget.Position
+		end
+		if values.rage.aimbot['force mode'].Dropdown == 'headshot' and values.rage.aimbot['force hit'].Toggle and RageTarget ~= nil then
+			args[1] = RageTarget.Parent.Head
+			args[2] = RageTarget.Position
+		end
 		if values.rage.aimbot["force hit"].Toggle and RageTarget ~= nil then
 			args[1] = RageTarget
             args[2] = RageTarget.Position
