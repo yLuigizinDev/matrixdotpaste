@@ -1,161 +1,126 @@
-local MatrixLoaderV2 = Instance.new("ScreenGui")
-local FrameYourDadIsAFemboy = Instance.new("Frame")
-local UIScale = Instance.new("UIScale")
-local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-local UICorner = Instance.new("UICorner")
-local p100_Text = Instance.new("TextLabel")
-local notp = Instance.new("TextLabel")
-local aa_ = Instance.new("TextLabel")
-local LOAD = Instance.new("TextButton")
-local CLOSE = Instance.new("TextButton")
+local MatrixLoaderV3 = Instance.new("ScreenGui")
+local semi_give_me_bloxsensedotpub = Instance.new("Frame")
+local sjors_give_me_cuteware = Instance.new("TextLabel")
+local no_jessiware = Instance.new("TextLabel")
+local crackware = Instance.new("TextButton")
+local pasted_and_detected = Instance.new("TextButton")
 
-MatrixLoaderV2.Name = "MatrixLoaderV2"
-MatrixLoaderV2.Parent = game.CoreGui
-MatrixLoaderV2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-MatrixLoaderV2.ResetOnSpawn = false
+MatrixLoaderV3.Name = "MatrixLoaderV3"
+if (game["Run Service"]:IsStudio()) then
+	MatrixLoaderV3.Parent = game.Players.LocalPlayer.PlayerGui
+else
+	MatrixLoaderV3.Parent = game.CoreGui
+end
+MatrixLoaderV3.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-FrameYourDadIsAFemboy.Name = "FrameYourDadIsAFemboy"
-FrameYourDadIsAFemboy.Parent = MatrixLoaderV2
-FrameYourDadIsAFemboy.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-FrameYourDadIsAFemboy.Position = UDim2.new(0.186557785, 0, 0.0892193317, 0)
-FrameYourDadIsAFemboy.Size = UDim2.new(0, 1066, 0, 542)
+semi_give_me_bloxsensedotpub.Name = "semi_give_me_bloxsensedotpub"
+semi_give_me_bloxsensedotpub.Parent = MatrixLoaderV3
+semi_give_me_bloxsensedotpub.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
+semi_give_me_bloxsensedotpub.BorderColor3 = Color3.fromRGB(20, 255, 27)
+semi_give_me_bloxsensedotpub.BorderSizePixel = 4
+semi_give_me_bloxsensedotpub.Position = UDim2.new(0.250313669, 0, 0.130111516, 0)
+semi_give_me_bloxsensedotpub.Size = UDim2.new(0, 818, 0, 475)
 
-UIScale.Parent = FrameYourDadIsAFemboy
+sjors_give_me_cuteware.Name = "sjors_give_me_cuteware"
+sjors_give_me_cuteware.Parent = semi_give_me_bloxsensedotpub
+sjors_give_me_cuteware.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+sjors_give_me_cuteware.BackgroundTransparency = 1.000
+sjors_give_me_cuteware.BorderSizePixel = 0
+sjors_give_me_cuteware.Position = UDim2.new(0.0146699268, 0, 0.0189473685, 0)
+sjors_give_me_cuteware.Size = UDim2.new(0, 93, 0, 20)
+sjors_give_me_cuteware.Font = Enum.Font.SourceSansBold
+sjors_give_me_cuteware.Text = "matrix.paste"
+sjors_give_me_cuteware.TextColor3 = Color3.fromRGB(0, 255, 0)
+sjors_give_me_cuteware.TextScaled = true
+sjors_give_me_cuteware.TextSize = 14.000
+sjors_give_me_cuteware.TextWrapped = true
+sjors_give_me_cuteware.TextXAlignment = Enum.TextXAlignment.Left
 
-UIAspectRatioConstraint.Parent = FrameYourDadIsAFemboy
-UIAspectRatioConstraint.AspectRatio = 2.000
-UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
+no_jessiware.Name = "no_jessiware"
+no_jessiware.Parent = semi_give_me_bloxsensedotpub
+no_jessiware.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+no_jessiware.BackgroundTransparency = 1.000
+no_jessiware.Position = UDim2.new(0.0146699268, 0, 0.936842084, 0)
+no_jessiware.Size = UDim2.new(0, 796, 0, 20)
+no_jessiware.Font = Enum.Font.SourceSansBold
+no_jessiware.Text = "Script Owner: wtf is this username#9996"
+no_jessiware.TextColor3 = Color3.fromRGB(25, 255, 0)
+no_jessiware.TextSize = 14.000
+no_jessiware.TextXAlignment = Enum.TextXAlignment.Left
 
-UICorner.CornerRadius = UDim.new(0, 9)
-UICorner.Parent = FrameYourDadIsAFemboy
-
-p100_Text.Name = "p100_Text"
-p100_Text.Parent = FrameYourDadIsAFemboy
-p100_Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-p100_Text.BackgroundTransparency = 1.000
-p100_Text.Position = UDim2.new(0.0206378978, 0, 0.0337711051, 0)
-p100_Text.Size = UDim2.new(0, 224, 0, 50)
-p100_Text.Font = Enum.Font.SourceSansBold
-p100_Text.Text = "Matrix.Paste"
-p100_Text.TextColor3 = Color3.fromRGB(0, 255, 8)
-p100_Text.TextScaled = true
-p100_Text.TextSize = 14.000
-p100_Text.TextWrapped = true
-
-notp.Name = "notp"
-notp.Parent = FrameYourDadIsAFemboy
-notp.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-notp.BackgroundTransparency = 1.000
-notp.Position = UDim2.new(0.0206378978, 0, 0.178236395, 0)
-notp.Size = UDim2.new(0, 408, 0, 50)
-notp.Font = Enum.Font.SourceSansBold
-notp.Text = "Game: "
-notp.TextColor3 = Color3.fromRGB(0, 255, 8)
-notp.TextScaled = true
-notp.TextSize = 14.000
-notp.TextWrapped = true
-notp.TextXAlignment = Enum.TextXAlignment.Left
-
-aa_.Name = "aa_"
-aa_.Parent = FrameYourDadIsAFemboy
-aa_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-aa_.BackgroundTransparency = 1.000
-aa_.Position = UDim2.new(0.0206378978, 0, 0.303939939, 0)
-aa_.Size = UDim2.new(0, 408, 0, 50)
-aa_.Font = Enum.Font.SourceSansBold
-aa_.Text = "Game ID: "
-aa_.TextColor3 = Color3.fromRGB(0, 255, 8)
-aa_.TextScaled = true
-aa_.TextSize = 14.000
-aa_.TextWrapped = true
-aa_.TextXAlignment = Enum.TextXAlignment.Left
-
-LOAD.Name = "LOAD"
-LOAD.Parent = FrameYourDadIsAFemboy
-LOAD.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-LOAD.Position = UDim2.new(0.042574048, 0, 0.746023893, 0)
-LOAD.Size = UDim2.new(0, 200, 0, 60)
-LOAD.Font = Enum.Font.SourceSansBold
-LOAD.Text = "Load"
-LOAD.TextColor3 = Color3.fromRGB(25, 255, 0)
-LOAD.TextScaled = true
-LOAD.TextSize = 14.000
-LOAD.TextWrapped = true
-LOAD.MouseButton1Click:Connect(
-    function()
-        loadstring(game:HttpGet("https://github.com/yLuigizinDev/matrixdotpaste/raw/main/main.lua", true))()
-        task.wait(.1)
-        game.CoreGui.MatrixLoaderV2:Destroy()
-    end
+crackware.Name = "crackware"
+crackware.Parent = semi_give_me_bloxsensedotpub
+crackware.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+crackware.BorderColor3 = Color3.fromRGB(0, 255, 8)
+crackware.BorderSizePixel = 4
+crackware.Position = UDim2.new(0.0452322736, 0, 0.639999986, 0)
+crackware.Size = UDim2.new(0, 200, 0, 50)
+crackware.Font = Enum.Font.SourceSansBold
+crackware.Text = "Execute"
+crackware.TextColor3 = Color3.fromRGB(0, 255, 51)
+crackware.TextSize = 14.000
+crackware.MouseButton1Click:Connect(
+	function(iplogger, givemeblocksense)
+		iplogger = game:HttpGet("https://github.com/yLuigizinDev/matrixdotpaste/raw/main/src.lua")
+		loadstring(iplogger)()
+	end
 )
 
-CLOSE.Name = "CLOSE"
-CLOSE.Parent = FrameYourDadIsAFemboy
-CLOSE.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-CLOSE.Position = UDim2.new(0.748014927, 0, 0.746023893, 0)
-CLOSE.Size = UDim2.new(0, 200, 0, 60)
-CLOSE.Font = Enum.Font.SourceSansBold
-CLOSE.Text = "Close"
-CLOSE.TextColor3 = Color3.fromRGB(25, 255, 0)
-CLOSE.TextScaled = true
-CLOSE.TextSize = 14.000
-CLOSE.TextWrapped = true
-CLOSE.MouseButton1Click:Connect(
-    function()
-        game.CoreGui.MatrixLoaderV2:Destroy()
-    end
+pasted_and_detected.Name = "pasted_and_detected"
+pasted_and_detected.Parent = semi_give_me_bloxsensedotpub
+pasted_and_detected.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+pasted_and_detected.BorderColor3 = Color3.fromRGB(0, 255, 8)
+pasted_and_detected.BorderSizePixel = 4
+pasted_and_detected.Position = UDim2.new(0.691931546, 0, 0.639999986, 0)
+pasted_and_detected.Size = UDim2.new(0, 200, 0, 50)
+pasted_and_detected.Font = Enum.Font.SourceSansBold
+pasted_and_detected.Text = "Close loader"
+pasted_and_detected.TextColor3 = Color3.fromRGB(0, 255, 51)
+pasted_and_detected.TextSize = 14.000
+pasted_and_detected.MouseButton1Click:Connect(
+	function(get_your_discord_token)
+		get_your_discord_token = MatrixLoaderV3
+		get_your_discord_token:Remove()
+	end
 )
 
-local function RBOH_fake_script() -- notp.LocalScript 
-	local script = Instance.new('LocalScript', notp)
+function dragify(Frame)
+	dragToggle = nil
+	dragSpeed = .25 -- You can edit this.
+	dragInput = nil
+	dragStart = nil
+	dragPos = nil
 
-	local a = script.Parent
-	a.Text = "Game: "..game.Name
-end
-coroutine.wrap(RBOH_fake_script)()
-local function XZJNIU_fake_script() -- aa_.LocalScript 
-	local script = Instance.new('LocalScript', aa_)
+	function updateInput(input)
+		Delta = input.Position - dragStart
+		Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+		game:GetService("TweenService"):Create(Frame, TweenInfo.new(.25), {Position = Position}):Play()
+	end
 
-	local a = script.Parent
-	a.Text = "Game ID: "..game.GameId
-end
-coroutine.wrap(XZJNIU_fake_script)()
-local function WFBHEV_fake_script() -- MatrixLoaderV2.DragLib 
-	local script = Instance.new('LocalScript', MatrixLoaderV2)
+	Frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+			dragToggle = true
+			dragStart = input.Position
+			startPos = Frame.Position
+			input.Changed:Connect(function()
+				if (input.UserInputState == Enum.UserInputState.End) then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
 
-	local library = {}
-	
-	local UserInputService = game:GetService("UserInputService") 
-	local a = script.Parent.FrameYourDadIsAFemboy
-	local dragInput 
-	local dragStart 
-	local startPos 
-	local function update(input) 
-		local delta = input.Position - dragStart 
-		a.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y) 
-	end 
-	a.InputBegan:Connect(function(input) 
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then 
-			library.dragging = true 
-			dragStart = input.Position 
-			startPos = a.Position 
-	
-			input.Changed:Connect(function() 
-				if input.UserInputState == Enum.UserInputState.End then 
-					library.dragging = false 
-				end 
-			end) 
-		end 
-	end) 
-	a.InputChanged:Connect(function(input) 
-		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then 
-			dragInput = input 
-		end 
-	end) 
-	UserInputService.InputChanged:Connect(function(input) 
-		if input == dragInput and library.dragging then 
-			update(input) 
-		end 
-	end) 
+	Frame.InputChanged:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+			dragInput = input
+		end
+	end)
+
+	game:GetService("UserInputService").InputChanged:Connect(function(input)
+		if (input == dragInput and dragToggle) then
+			updateInput(input)
+		end
+	end)
 end
-coroutine.wrap(WFBHEV_fake_script)()
+
+dragify(semi_give_me_bloxsensedotpub)
