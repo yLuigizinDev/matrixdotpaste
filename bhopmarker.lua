@@ -1,6 +1,11 @@
 -- Bhop Marker
 
 local BH = Instance.new("ScreenGui")
+
+if syn then
+    syn.protect_gui(BH)
+end
+
 local BHF = Instance.new("Frame")
 local TEXT = Instance.new("TextLabel")
 
