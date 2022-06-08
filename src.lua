@@ -10,6 +10,11 @@ getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNew
 task.wait(0.001)
 
 local WatermarkLOLRetard = Instance.new("ScreenGui")
+
+if syn then
+	syn.protect_gui(WatermarkLOLRetard)
+end
+
 local WatermarkLOLRetardFrameLOL = Instance.new("Frame")
 local _1 = Instance.new("TextLabel")
 
@@ -44,7 +49,9 @@ local function AULM_fake_script() -- _1.LocalScript
 
 	local CheatName = "matrix.paste"
 	
-	_1.Text = CheatName.." | "..game.Players.LocalPlayer.Name.." | "..os.date('%H:%M:%S')
+	while true do wait(1)
+		_1.Text = CheatName.." | "..game.Players.LocalPlayer.Name.." | "..os.date('%H:%M:%S')
+	end
 end
 coroutine.wrap(AULM_fake_script)()
 
@@ -59,8 +66,8 @@ local ConfigLoad = Signal.new("ConfigLoad")
 local txt = game:GetService("TextService")
 local TweenService = game:GetService("TweenService")
 function library:Tween(...) TweenService:Create(...):Play() end
-local cfglocation = "aristoiscfg/"
-makefolder("aristoiscfg")
+local cfglocation = "matrixcfg/"
+makefolder("matrixcfg")
 
 local Vec2 = Vector2.new      
 local Vec3 = Vector3.new      
@@ -144,20 +151,25 @@ end
 function library:New(name)
 	local menu = {}
 
-	local Aristois = Instance.new("ScreenGui")
+	local MatrixGui = Instance.new("ScreenGui")
+
+	if syn then
+		syn.protect_gui(MatrixGui)
+	end
+
 	local Menu = Instance.new("ImageLabel")
 	local TextLabel = Instance.new("TextLabel")
 	local TabButtons = Instance.new("Frame")
 	local UIListLayout = Instance.new("UIListLayout")
 	local Tabs = Instance.new("Frame")
 
-	Aristois.Name = "Aristois"
-	Aristois.ResetOnSpawn = false
-	Aristois.ZIndexBehavior = "Global"
-	Aristois.DisplayOrder = 420133769
+	MatrixGui.Name = "MatrixGui"
+	MatrixGui.ResetOnSpawn = false
+	MatrixGui.ZIndexBehavior = "Global"
+	MatrixGui.DisplayOrder = 420133769
 
 	local UIScale = Instance.new("UIScale")
-	UIScale.Parent = Aristois
+	UIScale.Parent = MatrixGui
 
 	function menu:SetScale(scale)
 		UIScale.Scale = scale
@@ -167,11 +179,11 @@ function library:New(name)
 	but.Modal = true
 	but.Text = ""
 	but.BackgroundTransparency = 1
-	but.Parent = Aristois
+	but.Parent = MatrixGui
 
 	local cursor = Instance.new("ImageLabel")
 	cursor.Name = "cursor"
-	cursor.Parent = Aristois
+	cursor.Parent = MatrixGui
 	cursor.BackgroundTransparency = 1
 	cursor.Size = UDim2.new(0,17,0,17)
 	cursor.Image = "rbxassetid://518398610"
@@ -183,12 +195,12 @@ function library:New(name)
 	local Mouse = LocalPlayer:GetMouse()
 
 	game:GetService("RunService").RenderStepped:connect(function()
-		cursor.Visible = Aristois.Enabled
+		cursor.Visible = MatrixGui.Enabled
 		cursor.Position = UDim2.new(0,Mouse.X-3,0,Mouse.Y+1)
 	end)
 
 	Menu.Name = "Menu"
-	Menu.Parent = Aristois
+	Menu.Parent = MatrixGui
 	Menu.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Menu.Position = UDim2.new(0.5, -300, 0.5, -300)
 	Menu.Size = UDim2.new(0, 600, 0, 600)
@@ -198,8 +210,8 @@ function library:New(name)
 
 	game:GetService("UserInputService").InputBegan:Connect(function(key)
 		if key.KeyCode == Enum.KeyCode.Insert then
-			Aristois.Enabled = not Aristois.Enabled
-			library.uiopen = Aristois.Enabled
+			MatrixGui.Enabled = not MatrixGui.Enabled
+			library.uiopen = MatrixGui.Enabled
 		end
 	end)
 
@@ -235,6 +247,10 @@ function library:New(name)
 		UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
 		KeybindList.Parent = game.CoreGui
+	end
+
+	if syn then
+		syn.protect_gui(KeybindList)
 	end
 
 	function keybindadd(text)
@@ -4202,7 +4218,7 @@ function library:New(name)
 		return Tab
 	end
 
-	Aristois.Parent = game.CoreGui
+	MatrixGui.Parent = game.CoreGui
 
 	return menu
 end
@@ -4308,6 +4324,11 @@ local Skyboxes = {
 local NewScope
 do
 	local ScreenGui = Instance.new("ScreenGui")
+
+	if syn then
+		syn.protect_gui(ScreenGui)
+	end
+	
 	local Frame = Instance.new("Frame")
 	local Frame_2 = Instance.new("Frame")
 
@@ -4610,12 +4631,12 @@ for i,v in ipairs(AllWeapons) do
 	end
 end
 
-makefolder("aristoislua")
+makefolder("matrixlua")
 
 local allluas = {}
 
-for _,lua in pairs(listfiles("aristoislua")) do
-	local luaname = string.gsub(lua, "aristoislua\\", "")
+for _,lua in pairs(listfiles("matrixlua")) do
+	local luaname = string.gsub(lua, "matrixlua\\", "")
 	table.insert(allluas, luaname)
 end
 
@@ -4644,7 +4665,7 @@ end
 local luascripts = luas:Sector("lua scripts", "Left")
 luascripts:Element("Scroll", "lua", {options = allluas, Amount = 5})
 luascripts:Element("Button", "load", {}, function()
-	loadstring(readfile("aristoislua\\"..values.luas["lua scripts"].lua.Scroll))()
+	loadstring(readfile("matrixlua\\"..values.luas["lua scripts"].lua.Scroll))()
 end)
 
 local knife = skins:Sector("knife", "Left")
@@ -4735,6 +4756,10 @@ aimbot:Element("Toggle", "anti godmode (insta kill)")
 aimbot:Element("Toggle", "teammates")
 aimbot:Element("Toggle", "auto baim")
 aimbot:Element("Toggle", "knifebot")
+aimbot:Element("Dropdown", "knifebot type", {options = {"standart", "aura", "Hittin P"}})
+aimbot:Element("Slider", "Knifebot Radius", {min = -1, max = 1000, default = 20})
+aimbot:Element("Slider", "HPS", {min = 1, max = 200, default = 1})
+aimbot:Element("Toggle", "knifebot ignore map", {default = {Toggle = false}})
 
 local weapons = rage:MSector("weapons", "Left")
 local default = weapons:Tab("default")
@@ -5515,6 +5540,10 @@ do
 		Items[plr.Name]:Destroy()
 	end)
 end
+
+if syn then
+	syn.protect_gui(Items)
+end
 local debrisitems = {}
 workspace.Debris.ChildAdded:Connect(function(obj)
 	if obj:IsA("BasePart") and Weapons:FindFirstChild(obj.Name) then
@@ -5701,6 +5730,9 @@ RunService.RenderStepped:Connect(function(step)
 						if Player.Team ~= LocalPlayer.Team or values.rage.aimbot.teammates.Toggle and Player:FindFirstChild("Status") and Player.Status.Team.Value ~= LocalPlayer.Status.Team.Value and Player.Status.Alive.Value then
 							if Client.gun:FindFirstChild("Melee") and values.rage.aimbot["knifebot"].Toggle then
 								local Ignore = {unpack(Collision)}
+								if values.rage.aimbot["knifebot ignore map"].Toggle then
+									table.insert(Ignore, game.Workspace.Map)
+								end
 								table.insert(Ignore, workspace.Map.Clips)
 								table.insert(Ignore, workspace.Map.SpawnPoints)
 								table.insert(Ignore, LocalPlayer.Character)
@@ -5710,6 +5742,86 @@ RunService.RenderStepped:Connect(function(step)
 								end
 								if Player.Character:FindFirstChild("Gun") then
 									table.insert(Ignore, Player.Character.Gun)
+								end
+
+								local Ray = Ray.new(Origin, (Player.Character.HumanoidRootPart.Position - Origin).unit * values.rage.aimbot["Knifebot Radius"].Slider)      
+								local Hit, Pos = workspace:FindPartOnRayWithIgnoreList(Ray, Ignore, false, true)    
+
+								if Hit and Hit.Parent == Player.Character then
+									RageGuy = Hit      
+									RageTarget = Hit      
+										 
+									Filter = true      
+									--Client.firebullet()      
+										
+
+									if values.rage.aimbot["knifebot type"].Dropdown == "standart" then
+										local Arguments = {
+											[1] = Hit,
+											[2] = Hit.Position,
+											[3] = Client.gun.Name,
+											[4] = 4096,
+											[5] = LocalPlayer.Character.Gun,
+											[8] = 1,
+											[9] = false,
+											[10] = false,
+											[11] = Vector3.new(),
+											[12] = 16868,
+											[13] = Vector3.new()
+										}
+										if values.rage.aimbot["HPS"].Slider > 1 then
+											for i=1, values.rage.aimbot["HPS"].Slider do
+												game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+											end
+										else
+											game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+										end
+									end
+										if values.rage.aimbot["knifebot type"].Dropdown == "aura" then
+											local Arguments = {
+												[1] = Hit,
+												[2] = Hit.Position,
+												[3] = "Banana",
+												[4] = 4096,
+												[5] = LocalPlayer.Character.Gun,
+												[8] = 1,
+												[9] = false,
+												[10] = false,
+												[11] = Vector3.new(),
+												[12] = 16868,
+												[13] = Vector3.new()
+											}
+											if values.rage.aimbot["HPS"].Slider > 1 then
+												for i=1, values.rage.aimbot["HPS"].Slider do
+													game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+												end
+											else
+												game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+											end
+										end
+										if values.rage.aimbot["knifebot type"].Dropdown == "Hittin P" then
+											local Arguments = { 
+												[1] = Hit, 
+												[2] = Hit.Position, 
+												[3] = Client.gun.Name,
+												[4] = 4096, 
+												[5] = LocalPlayer.Character.Gun, 
+												[8] = math.random(10, 435), 
+												[9] = true, 
+												[10] = true, 
+												[11] = Vec3(), 
+												[12] = 1, 
+												[13] = Vec3() 
+											} 
+											if values.rage.aimbot["HPS"].Slider > 1 then
+												for i=1, values.rage.aimbot["HPS"].Slider do
+													game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+												end
+											else
+												game.ReplicatedStorage.Events.HitPart:FireServer(unpack(Arguments))
+											end
+										end	
+										Filter = false  
 								end
 
 								local Ray = Ray.new(Origin, (Player.Character.Head.Position - Origin).unit * 20)
@@ -5859,6 +5971,7 @@ RunService.RenderStepped:Connect(function(step)
 												end
 											else
 												local penetration = Client.gun.Penetration.Value * 0.01
+
 												local limit = 0
 												local dmgmodifier = 1
 												for i = 1, #Hits do
